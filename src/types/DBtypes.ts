@@ -30,7 +30,6 @@ type Comment = Partial<Document> & {
   text: string;
   publicationDate: Date;
   post: Offer | Review | Types.ObjectId;
-  onModel: "Offer" | "Review";
 };
 
 type Offer = Partial<Document> & {

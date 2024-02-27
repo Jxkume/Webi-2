@@ -20,14 +20,8 @@ const commentModel = new mongoose.Schema<Comment>({
 
   post: {
     type: mongoose.Schema.Types.ObjectId,
-    refPath: "onModel",
+    ref: "Offer | Review",
     required: true,
-  },
-
-  onModel: {
-    type: String,
-    required: true,
-    enum: ["Offer", "Review"],
   },
 });
 

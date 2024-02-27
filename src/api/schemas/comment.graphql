@@ -19,7 +19,6 @@ type Comment {
   text: String!
   publicationDate: DateTime
   post: Post!
-  onModel: String!
 }
 
 type Offer {
@@ -61,7 +60,6 @@ input CommentInput {
   text: String!
   publicationDate: DateTime
   post: ID!
-  onModel: String!
 }
 
 input CommentModify {
@@ -69,5 +67,4 @@ input CommentModify {
   text: String
   publicationDate: DateTime
   post: ID
-  onModel: String
 }
