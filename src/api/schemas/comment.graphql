@@ -1,0 +1,59 @@
+scalar DateTime
+
+type Comment {
+    id: ID!
+    author: User!
+    text: String!
+    publicationDate: DateTime
+    post: Post!
+    onModel: String!
+}
+
+type Post {
+    ... on Offer {
+        id: ID!
+        author: User!
+        category: Category!
+        header: String!
+        text: String!
+        publicationDate: DateTime
+        deletionDate: DateTime
+    }
+    ... on Review {
+        id: ID!
+        autor: User!
+        category: Category!
+        header: String!
+        text: String!
+        filename: String!
+        publicationDate: DateTime
+        rating: Int!
+    }
+}
+
+type Query {
+    commentById(id: ID!): Comment
+    comments: [Comment]
+}
+
+type Mutation {
+    createComment(input: CommentInput!): Comment
+    updateComment(id: ID!, input: CommentModify!): Comment
+    deleteComment(id: ID!): Comment
+}
+
+input CommentInput {
+    author: ID!
+    text: String!
+    publicationDate: DateTime
+    post: ID!
+    onModel: String!
+}
+
+input CommentModify {
+    author: ID
+    text: String
+    publicationDate: DateTime
+    post: ID
+    onModel: String
+}
