@@ -45,9 +45,23 @@ type Offer = Partial<Document> & {
 
 type LoginUser = Omit<User, "password">;
 
+type UserOutput = Omit<User, "password" | "role">;
+
+type UserInput = Omit<User, "id" | "role">;
+
 type TokenContent = {
   token: string;
   user: LoginUser;
 };
 
-export { User, Category, Review, Comment, Offer, LoginUser, TokenContent };
+export {
+  User,
+  Category,
+  Review,
+  Comment,
+  Offer,
+  LoginUser,
+  TokenContent,
+  UserOutput,
+  UserInput,
+};

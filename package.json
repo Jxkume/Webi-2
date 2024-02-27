@@ -2,15 +2,33 @@
   "name": "webi-2",
   "version": "1.0.0",
   "description": "Simple GraphQl web application for the school project",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/src/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "copyGraphql": "copyfiles --error src/api/schemas/*.graphql dist",
+    "postbuild": "npm run copyGraphql",
+    "lint": "eslint --fix src test",
+    "test": "jest"
   },
-  "author": "",
+  "author": "JH",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.10.0",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.3",
+    "@graphql-tools/schema": "^10.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1",
+    "graphql-middleware": "^6.1.35",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.6"
   }
 }

@@ -1,59 +1,73 @@
 scalar DateTime
 
-type Comment {
-    id: ID!
-    author: User!
-    text: String!
-    publicationDate: DateTime
-    post: Post!
-    onModel: String!
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+  role: String!
 }
 
-type Post {
-    ... on Offer {
-        id: ID!
-        author: User!
-        category: Category!
-        header: String!
-        text: String!
-        publicationDate: DateTime
-        deletionDate: DateTime
-    }
-    ... on Review {
-        id: ID!
-        autor: User!
-        category: Category!
-        header: String!
-        text: String!
-        filename: String!
-        publicationDate: DateTime
-        rating: Int!
-    }
+type Category {
+  id: ID!
+  name: String!
 }
+
+type Comment {
+  id: ID!
+  author: User!
+  text: String!
+  publicationDate: DateTime
+  post: Post!
+  onModel: String!
+}
+
+type Offer {
+  id: ID!
+  author: User!
+  category: Category!
+  header: String!
+  text: String!
+  publicationDate: DateTime
+  deletionDate: DateTime
+}
+
+type Review {
+  id: ID!
+  author: User!
+  category: Category!
+  header: String!
+  text: String!
+  filename: String!
+  publicationDate: DateTime
+  rating: Int!
+}
+
+union Post = Offer | Review
 
 type Query {
-    commentById(id: ID!): Comment
-    comments: [Comment]
+  commentById(id: ID!): Comment
+  comments: [Comment]
 }
 
 type Mutation {
-    createComment(input: CommentInput!): Comment
-    updateComment(id: ID!, input: CommentModify!): Comment
-    deleteComment(id: ID!): Comment
+  createComment(input: CommentInput!): Comment
+  updateComment(id: ID!, input: CommentModify!): Comment
+  deleteComment(id: ID!): Comment
 }
 
 input CommentInput {
-    author: ID!
-    text: String!
-    publicationDate: DateTime
-    post: ID!
-    onModel: String!
+  author: ID!
+  text: String!
+  publicationDate: DateTime
+  post: ID!
+  onModel: String!
 }
 
 input CommentModify {
-    author: ID
-    text: String
-    publicationDate: DateTime
-    post: ID
-    onModel: String
+  author: ID
+  text: String
+  publicationDate: DateTime
+  post: ID
+  onModel: String
 }
