@@ -9,6 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^8.2.0"
+    "eslint": "^8.57.0",
+    "graphql": "^16.8.1",
+    "mongoose": "^8.2.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }
