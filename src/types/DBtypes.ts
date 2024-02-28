@@ -42,9 +42,13 @@ type Offer = Partial<Document> & {
     deletionDate: Date;
 }
 
+type UserOutput = Omit<User, "password" | "role">;
+
+type UserInput = Omit<User, "id" | "role">;
+
 type TokenContent = {
     token: string;
     user: Omit<User, 'password'>;
 }
 
-export {User, Category, Review, Comment, Offer, TokenContent};
+export {User, Category, Review, Comment, Offer, TokenContent, UserOutput, UserInput};

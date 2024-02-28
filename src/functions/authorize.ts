@@ -14,4 +14,18 @@ const isLoggedIn = (context: MyContext): void => {
   }
 };
 
-export {isLoggedIn};
+const isAdmin = (context: MyContext): void => {
+  isLoggedIn(context);
+  if (context.userdata && context.userdata.user.role !== "admin") {
+    throw new GraphQLError("Not authorized", {
+      extensions: {
+        code: "UNAUTHORIZED",
+        http: {
+          status: 401,
+        },
+      },
+    });
+  }
+};
+
+export {isLoggedIn, isAdmin};
