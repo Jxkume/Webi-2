@@ -1,6 +1,6 @@
 import commentModel from "../models/commentModel";
 import { Comment } from "../../types/DBtypes";
-import { MyContext } from "../../types/MyContext";
+import MyContext from "../../types/MyContext";
 import { isAdmin, isLoggedIn } from "../../functions/authorize";
 
 export default {

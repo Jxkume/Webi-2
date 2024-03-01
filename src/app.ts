@@ -15,7 +15,7 @@ import { notFound, errorHandler } from "./middlewares";
 import authenticate from "./functions/authenticate";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { applyMiddleware } from "graphql-middleware";
-import { MyContext } from "./types/MyContext";
+import MyContext from "./types/MyContext";
 
 const app = express();
 

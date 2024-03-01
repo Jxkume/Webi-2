@@ -1,6 +1,6 @@
 import offerModel from "../models/offerModel";
 import { Offer } from "../../types/DBtypes";
-import { MyContext } from "../../types/MyContext";
+import MyContext from "../../types/MyContext";
 import { isAdmin, isLoggedIn } from "../../functions/authorize";
 
 export default {

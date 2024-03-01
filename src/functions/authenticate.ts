@@ -1,7 +1,7 @@
 import { Request } from "express";
 import jwt from "jsonwebtoken";
 import { LoginUser, TokenContent } from "../types/DBtypes";
-import { MyContext } from "../types/MyContext";
+import MyContext from "../types/MyContext";
 
 export default async (req: Request): Promise<MyContext> => {
   const authHeader = req.headers.authorization;

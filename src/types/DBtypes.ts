@@ -50,7 +50,7 @@ type UserInput = Omit<User, "id" | "role">;
 
 type TokenContent = {
   token: string;
-  user: LoginUser;
+  user: Omit<User, "password">;
 };
 
 export {
@@ -59,8 +59,8 @@ export {
   Review,
   Comment,
   Offer,
-  LoginUser,
   TokenContent,
   UserOutput,
   UserInput,
+  LoginUser,
 };

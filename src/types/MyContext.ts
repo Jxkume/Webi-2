@@ -1,7 +1,7 @@
 import { TokenContent } from "./DBtypes";
 
 type MyContext = {
-  userdata?: TokenContent;
+    userdata?: TokenContent;
 };
 
-export { MyContext };
+export default MyContext;
