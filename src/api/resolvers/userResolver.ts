@@ -5,13 +5,26 @@ import MyContext from "../../types/MyContext";
 import {isLoggedIn, isAdmin} from "../../functions/authorize";
 
 export default {
-  //TÄNNE TULEE MYÖS COMMENT JA OFFER MERGEN JÄLKEEN!!!
   Review: {
     author: async (parent: Review) => {
       return await fetchData<User>(
         `${process.env.AUTH_URL}/users/${parent.author}`,
       );
     },
+  },
+  Comment: {
+    author: async (parent: Comment) => {
+      return await fetchData<User>(
+        `${process.env.AUTH_URL}/users/${parent.author}`,
+      );
+    }
+  },
+  Offer: {
+    author: async (parent: Offer) => {
+      return await fetchData<User>(
+        `${process.env.AUTH_URL}/users/${parent.author}`,
+      );
+    }
   },
   Query: {
     users: async () => {

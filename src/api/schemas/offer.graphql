@@ -35,10 +35,8 @@ type Mutation {
 }
 
 input OfferInput {
-  author: ID!
   category: ID!
   header: String!
   text: String!
-  publicationDate: DateTime
   deletionDate: DateTime
 }

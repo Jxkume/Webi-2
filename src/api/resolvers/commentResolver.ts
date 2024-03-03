@@ -31,6 +31,7 @@ export default {
       try {
         isLoggedIn(context);
         args.input.author = context.userdata?.user.id;
+        args.input.publicationDate = new Date();
         return await commentModel.create(args.input);
       } catch (error) {
         throw new Error("Failed to create comment");

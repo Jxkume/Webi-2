@@ -31,6 +31,11 @@ export default {
       try {
         isLoggedIn(context);
         args.input.author = context.userdata?.user.id;
+        args.input.publicationDate = new Date();
+        if(!args.input.deletionDate) {
+          args.input.deletionDate = new Date();
+          args.input.deletionDate.setDate(args.input.deletionDate.getDate() + 14);
+        }
         return await offerModel.create(args.input);
       } catch (error) {
         throw new Error("Failed to create offer");

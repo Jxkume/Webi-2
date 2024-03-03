@@ -1,6 +1,6 @@
 import { Review } from "../../types/DBtypes";
 import MyContext from "../../types/MyContext";
-import { isAdmin } from "../../functions/authorize";
+import { isAdmin, isLoggedIn } from "../../functions/authorize";
 import CategoryModel from "../models/categoryModel";
 import ReviewModel from "../models/reviewModel";
 
