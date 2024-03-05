@@ -1,0 +1,34 @@
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('cupcakes.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-image {
+    max-width: 100%; 
+    height: auto;
+  }
+  
+  .search-input {
+    flex-grow: 1; 
+    margin-right: 10px; 
+  }
+  
+  .search-button, .register-button {
+    white-space: nowrap; 
+  }
