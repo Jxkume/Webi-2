@@ -1,7 +1,7 @@
 import commentModel from "../models/commentModel";
 import { Comment } from "../../types/DBtypes";
 import MyContext from "../../types/MyContext";
-import { isAdmin, isLoggedIn } from "../../functions/authorize";
+import { isLoggedIn } from "../../functions/authorize";
 
 export default {
   Query: {
@@ -31,6 +31,7 @@ export default {
       try {
         isLoggedIn(context);
         args.input.author = context.userdata?.user.id;
+        args.input.publicationDate = new Date();
         return await commentModel.create(args.input);
       } catch (error) {
         throw new Error("Failed to create comment");

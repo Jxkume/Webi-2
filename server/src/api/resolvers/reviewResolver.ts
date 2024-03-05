@@ -29,6 +29,7 @@ export default {
     ) => {
       isLoggedIn(context);
       args.input.author = context.userdata?.user.id;
+      args.input.publicationDate = new Date();
       return await reviewModel.create(args.input);
     },
     updateReview: async (

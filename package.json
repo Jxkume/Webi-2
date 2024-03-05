@@ -25,7 +25,8 @@
     "graphql-middleware": "^6.1.35",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.0"
+    "mongoose": "^8.2.0",
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

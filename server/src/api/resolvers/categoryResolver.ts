@@ -18,7 +18,7 @@ export default {
   Mutation: {
     createCategory: async (
       _parent: undefined,
-      args: {name: string},
+      args: { name: string },
       context: MyContext
     ) => {
       isAdmin(context);
@@ -26,23 +26,23 @@ export default {
     },
     deleteCategory: async (
       _parent: undefined,
-      args: {id: string},
+      args: { id: string },
       context: MyContext
     ) => {
       isAdmin(context);
-      await ReviewModel.deleteMany({category: args.id});
+      await ReviewModel.deleteMany({ category: args.id });
       return await CategoryModel.findByIdAndDelete(args.id);
     },
     updateCategory: async (
       _parent: undefined,
-      args: {id: string, name: string},
+      args: { id: string; name: string },
       context: MyContext
     ) => {
       isAdmin(context);
       return await CategoryModel.findByIdAndUpdate(
         args.id,
-        {name: args.name},
-        {new: true}
+        { name: args.name },
+        { new: true }
       );
     },
   },
