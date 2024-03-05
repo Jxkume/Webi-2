@@ -6,11 +6,30 @@ import './Login.css';
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      console.log(email, password);
+      const loginMutation = `
+      mutation {login(credentials:{email: "${email}", password: "${password}"})
+      {
+        message
+        token
+        user {
+          email
+          username
+          id
+        }
+      }}
+      `;
+
+      const request = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: loginMutation }),
+      });
+      const response = await request.json();
+      console.log(response);
     };
     return (
         <Container>
@@ -18,7 +37,7 @@ const Login: React.FC = () => {
             <Col md={6} className="login-form-wrapper">
               <h2>Kirjaudu sisään</h2>
               <hr />
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Sähköposti</Form.Label>
                   <Form.Control
@@ -28,7 +47,7 @@ const Login: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
-    
+
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Salasana</Form.Label>
                   <Form.Control
@@ -41,7 +60,7 @@ const Login: React.FC = () => {
                     <Link to="/salasanaPalautus">Unohditko salasanan?</Link>
                   </Form.Text>
                 </Form.Group>
-    
+
                 <Button variant="primary" type="submit">
                   Kirjaudu
                 </Button>
@@ -56,5 +75,5 @@ const Login: React.FC = () => {
         </Container>
       );
     };
-    
+
     export default Login;
