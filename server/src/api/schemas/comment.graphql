@@ -61,8 +61,5 @@ input CommentInput {
 }
 
 input CommentModify {
-  author: ID
   text: String
-  publicationDate: DateTime
-  post: ID
 }
