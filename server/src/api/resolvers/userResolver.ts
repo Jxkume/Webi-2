@@ -46,6 +46,7 @@ export default {
   Mutation: {
     login: async (
       _parent: undefined,
+      //email works as username
       args: {credentials: {username: string; password: string}},
     ) => {
       return await fetchData<LoginResponse>(
