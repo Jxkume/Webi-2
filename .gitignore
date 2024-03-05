@@ -1,5 +1,6 @@
 /.env
 /.editorconfig
+node_modules
 client/node_modules/.package-lock.json
 client/node_modules/.bin/acorn
 client/node_modules/.bin/acorn.cmd
@@ -10000,5 +10001,5 @@ client/node_modules/camelcase-css/index.js
 client/node_modules/camelcase-css/license
 client/node_modules/camelcase-css/package.json
 client/node_modules/camelcase-css/README.md
-**/node_modules/
+
 
