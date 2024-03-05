@@ -1,3 +1,4 @@
 /.env
 /.editorconfig
 **/node_modules/
+server/.env
