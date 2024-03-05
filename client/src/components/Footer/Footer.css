@@ -6,15 +6,13 @@
     width: 100%;
     height: 50px;
     text-align: center;
-    display: none;
-    line-height: 30px;
-  }
-  
-  .footer.show {
     display: flex;
+    line-height: 30px;
     justify-content: center;
     align-items: center;
   }
+  
+
   
   body {
     margin-bottom: 30px;
