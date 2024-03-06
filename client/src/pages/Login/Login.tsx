@@ -2,15 +2,44 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Login.css';
+import { setCookie } from 'typescript-cookie'
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      console.log(email, password);
+      const loginMutation = `
+      mutation {login(credentials:{email: "${email}", password: "${password}"})
+      {
+        message
+        token
+        user {
+          email
+          username
+          id
+        }
+      }}
+      `;
+
+      const request = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: loginMutation }),
+      });
+      const response = await request.json();
+      console.log(response);
+
+      if (response.errors !== undefined) {
+        alert('Väärä sähköposti tai salasana!');
+      } else {
+        setCookie('token', response.data.login.token, { expires: 1 });
+        setCookie('iserID', response.data.login.user.id, { expires: 1 });
+        alert('Kirjautuminen onnistui!');
+        window.location.href = '/';
+      }
     };
     return (
         <Container>
@@ -18,7 +47,7 @@ const Login: React.FC = () => {
             <Col md={6} className="login-form-wrapper">
               <h2>Kirjaudu sisään</h2>
               <hr />
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Sähköposti</Form.Label>
                   <Form.Control
@@ -28,7 +57,7 @@ const Login: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
-    
+
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Salasana</Form.Label>
                   <Form.Control
@@ -41,7 +70,7 @@ const Login: React.FC = () => {
                     <Link to="/salasanaPalautus">Unohditko salasanan?</Link>
                   </Form.Text>
                 </Form.Group>
-    
+
                 <Button variant="primary" type="submit">
                   Kirjaudu
                 </Button>
@@ -56,5 +85,5 @@ const Login: React.FC = () => {
         </Container>
       );
     };
-    
+
     export default Login;
