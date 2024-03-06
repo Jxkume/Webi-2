@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Login.css';
+import { setCookie } from 'typescript-cookie'
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -30,6 +31,15 @@ const Login: React.FC = () => {
       });
       const response = await request.json();
       console.log(response);
+
+      if (response.errors !== undefined) {
+        alert('Väärä sähköposti tai salasana!');
+      } else {
+        setCookie('token', response.data.login.token, { expires: 1 });
+        setCookie('iserID', response.data.login.user.id, { expires: 1 });
+        alert('Kirjautuminen onnistui!');
+        window.location.href = '/';
+      }
     };
     return (
         <Container>
