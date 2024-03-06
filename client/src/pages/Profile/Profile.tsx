@@ -11,7 +11,7 @@ import { set } from "mobx";
 
 const Profile = observer(() => {
   const [isEditing, setIsEditing] = useState(false);
-  let {init, user, updateUser} = userStore;
+  let {init, user, updateUser, deleteUser} = userStore;
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState(user.username);
@@ -97,9 +97,16 @@ const Profile = observer(() => {
               </div>
             )}
             {!isEditing && (
-              <Button variant="outlined-primary" className="profileButton" onClick={() => setIsEditing(true)}>
-                Muokkaa
-              </Button>
+              <div>
+                <Button variant="outlined-primary" className="profileButton" onClick={() => setIsEditing(true)}>
+                  Muokkaa
+                </Button>
+                <Button variant="outlined-primary" className="profileButton" onClick={async () => {
+                  await deleteUser();
+                  setIsEditing(true)}}>
+                  Poista käyttäjä
+                </Button>
+              </div>
             )}
           </div>
         </Col>

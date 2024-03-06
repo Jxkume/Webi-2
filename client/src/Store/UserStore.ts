@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { User, UserInput } from "../Types/User";
 import { getCookie } from "typescript-cookie";
+import logout from "../Functions/Logout";
 
 class UserStore {
   user: User = {
@@ -39,6 +40,29 @@ class UserStore {
     console.log(response);
     this.user = response.data.checkToken.user;
     console.log(this.user);
+  }
+
+  deleteUser = async () => {
+    const token = getCookie('token');
+    const deleteMutation = `
+    mutation {deleteUser {
+      message
+      user {
+        username
+        email
+        id
+      }
+    }}
+    `;
+
+    const request = await fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+      body: JSON.stringify({ query: deleteMutation }),
+    });
+    const response = await request.json();
+    console.log(response);
+    logout();
   }
 
   updateUser = async (user: UserInput) => {

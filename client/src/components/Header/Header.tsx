@@ -1,9 +1,10 @@
 import React from "react";
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getCookie } from "typescript-cookie";
+import { getCookie, setCookie } from "typescript-cookie";
 import './Header.css';
 import Logo from '../../logo.svg';
+import logout from "../../Functions/Logout";
 
 const Header = () => {
     if (getCookie('token') === undefined) {
@@ -42,7 +43,7 @@ const Header = () => {
               <Nav.Link as={Link} to={"/"}>Ilmoitukset</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link as={Link} to={"/rekisteroidy"}>Rekisteröidy</Nav.Link>
+              <Nav.Link onClick={logout}>Kirjaudu ulos</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
