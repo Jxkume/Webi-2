@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { User, UserInput } from "../Types/User";
 import { getCookie } from "typescript-cookie";
 import logout from "../Functions/Logout";
+import bcrypt from 'bcryptjs';
 
 class UserStore {
   user: User = {
@@ -67,6 +68,8 @@ class UserStore {
 
   updateUser = async (user: UserInput) => {
     const token = getCookie('token');
+    //const salt = bcrypt.genSaltSync(10);
+    //user.password = await bcrypt.hash(user.password, salt);
     const updateUserMutation = `
     mutation {updateUser(user: {username: "${user.username}", email: "${user.email}", password: "${user.password}"}){
       message

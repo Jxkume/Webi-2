@@ -7,7 +7,7 @@ import { getCookie } from "typescript-cookie";
 import { get } from "http";
 import { User, UserInput } from "../../Types/User";
 import userStore from "../../Store/UserStore";
-import { set } from "mobx";
+import bcrypt from 'bcryptjs';
 
 const Profile = observer(() => {
   const [isEditing, setIsEditing] = useState(false);
@@ -85,8 +85,9 @@ const Profile = observer(() => {
                   variant="outlined-primary"
                   className="profileButton"
                   onClick={async () => {
-                    console.log(username, email, password);
-                    await updateUser({username: username, email: email, password: password});
+                    const encryptedPassword = await bcrypt.hash(password, 10);
+                    console.log(username, email, encryptedPassword);
+                    await updateUser({username: username, email: email, password: encryptedPassword});
                     setIsEditing(false);
                   }}>
                     Tallenna
