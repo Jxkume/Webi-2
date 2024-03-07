@@ -36,7 +36,7 @@ const Login: React.FC = () => {
         alert('Väärä sähköposti tai salasana!');
       } else {
         setCookie('token', response.data.login.token, { expires: 1 });
-        setCookie('iserID', response.data.login.user.id, { expires: 1 });
+        setCookie('userID', response.data.login.user.id, { expires: 1 });
         alert('Kirjautuminen onnistui!');
         window.location.href = '/';
       }
