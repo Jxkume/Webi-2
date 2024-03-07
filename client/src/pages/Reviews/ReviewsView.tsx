@@ -63,6 +63,10 @@ const ReviewView = () => {
  
     const handleCommentSubmit = async (event: any) => {
         event.preventDefault();
+        if (commentText.trim() === '') {
+            alert('Kommentti ei voi olla tyhjä!');
+            return;
+        }
         const token = getCookie('token');
         const response = await fetch('http://localhost:3000/graphql', {
             method: 'POST',

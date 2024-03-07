@@ -42,6 +42,12 @@ const NewReview = () => {
 
   const createReview = async (event: any) => {
     event.preventDefault();
+
+    if (inputs.reviewName.trim() === '' || inputs.reviewRating.trim() === '' || inputs.reviewDescription.trim() === '' || inputs.reviewCategory.trim() === '' || inputs.reviewFile.trim() === '') {
+        alert('Täytä kaikki kentät!');
+        return;
+    }
+
     const mutation = `
       mutation AddReview($input: InputReview!) {
         addReview(input: $input) {
