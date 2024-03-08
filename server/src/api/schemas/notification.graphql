@@ -1,0 +1,22 @@
+scalar DateTime
+
+type Notification{
+  id: ID!
+  receiver: User!
+  text: String!
+  date: DateTime!
+}
+
+input InputNotification {
+  receiver: ID!
+  text: String!
+}
+
+type Query {
+  notificationsByReceiver(receiverId: ID!): [Notification]
+}
+
+type Mutation {
+  addNotification(input: InputNotification!): Notification
+  deleteNotification(id: ID!): Notification
+}

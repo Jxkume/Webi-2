@@ -5,6 +5,7 @@ import MyContext from "../../types/MyContext";
 import {isLoggedIn, isAdmin} from "../../functions/authorize";
 
 export default {
+  //Remember to add notification
   Review: {
     author: async (parent: Review) => {
       return await fetchData<User>(
@@ -33,6 +34,12 @@ export default {
     userById: async (_parent: undefined, args: {id: string}) => {
       return await fetchData<User>(
         `${process.env.AUTH_URL}/users/${args.id}`,
+      );
+    },
+    //Returns all the users who follow a category. Calls usersByCategory from auth server
+    usersByCategory: async (_parent: undefined, args: {categoryId: string}) => {
+      return await fetchData<User[]>(
+        `${process.env.AUTH_URL}/users/categories/${args.categoryId}`,
       );
     },
     checkToken: async (
@@ -67,6 +74,41 @@ export default {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(args.user),
       });
+    },
+    addCategoryToUser: async (
+      _parent: undefined,
+      args: {categoryId: string},
+      context: MyContext,
+    ) => {
+      isLoggedIn(context);
+      return await fetchData<Partial<User>>(
+        `${process.env.AUTH_URL}/users/${context.userdata?.user.id}/categories`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${context.userdata?.token}`,
+          },
+          body: JSON.stringify({categoryId: args.categoryId}),
+        },
+      );
+    },
+    removeCategoryFromUser: async (
+      _parent: undefined,
+      args: {categoryId: string},
+      context: MyContext,
+    ) => {
+      return await fetchData<Partial<User>>(
+        `${process.env.AUTH_URL}/users/${context.userdata?.user.id}/categories`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${context.userdata?.token}`,
+          },
+          body: JSON.stringify({categoryId: args.categoryId}),
+        }
+      );
     },
     updateUser: async (
       _parent: undefined,
