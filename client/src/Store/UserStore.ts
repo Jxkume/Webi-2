@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { User, UserInput } from "../Types/User";
 import { getCookie } from "typescript-cookie";
 import logout from "../Functions/Logout";
-import bcrypt from 'bcryptjs';
+import checkToken from "../Functions/GetUserFromToken";
 
 class UserStore {
   user: User = {
@@ -20,7 +20,7 @@ class UserStore {
   }
 
   getUserData = async () => {
-    const token = getCookie('token');
+    /* const token = getCookie('token');
     console.log("TOKEN: ", token);
     const checkTokenQuery = `
     query {checkToken {
@@ -39,7 +39,8 @@ class UserStore {
     });
     const response = await request.json();
     console.log(response);
-    this.user = response.data.checkToken.user;
+    this.user = response.data.checkToken.user; */
+    this.user = await checkToken();
     console.log(this.user);
   }
 

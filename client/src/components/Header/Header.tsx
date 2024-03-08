@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getCookie, setCookie } from "typescript-cookie";
+import { getCookie } from "typescript-cookie";
 import './Header.css';
 import Logo from '../../logo.svg';
 import logout from "../../Functions/Logout";
