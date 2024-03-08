@@ -1,0 +1,33 @@
+.register-background {
+    background-size: cover;
+    height: 100vh;
+  }
+  
+  .register-form-col {
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 50px;
+    margin-top: 100px; 
+    border-radius: 15px;
+  }
+  
+  .register-form {
+    margin: 20px 0;
+  }
+  
+  .login-link {
+    margin-top: 20px;
+  }
+
+  .review-box {
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 1px solid #ccc; /* Light gray border */
+}
+
+.header-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

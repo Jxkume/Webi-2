@@ -21,7 +21,7 @@ const commentModel = new mongoose.Schema<Comment>({
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Offer | Review",
-    required: true,
+    //required: true,
   },
 });
 
