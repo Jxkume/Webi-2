@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { Home, Register, Login, ForgottenPassword, OffersList, Offer, NewOffer } from './pages';
+import { Home, Register, Login, ForgottenPassword, OffersList, Offer, NewOffer, Reviews, NewReview, ViewReview, Profile } from './pages';
 
 function App() {
   return (
@@ -12,11 +12,13 @@ function App() {
         <Router>
         <Header />
           <Routes>
-            <Route path="/arvostelut"></Route>
             <Route path="/tarjoukset" element={<OffersList/>}></Route>
             <Route path="/tarjous" element={<Offer/>}></Route>
             <Route path="/uusitarjous" element={<NewOffer/>}></Route>
-            <Route path="/profiili"></Route>
+            <Route path="/arvostelut" element={<Reviews/>}></Route>
+              <Route path="/uusiArvostelu" element={<NewReview/>}></Route>
+              <Route path="/nakymaArvostelu/:id" element={<ViewReview/>}></Route>
+              <Route path="/profiili" element={<Profile/>}></Route>
             <Route path="/meista"></Route>
             <Route path="/kirjaudu" element={<Login/>}></Route>
             <Route path="/rekisteroidy" element={<Register/>}></Route>

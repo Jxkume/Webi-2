@@ -1,40 +1,41 @@
 scalar DateTime
 
-type Review{
-    id: ID!
-    author: User!
-    category: Category!
-    header: String!
-    text: String!
-    filename: String!
-    publicationDate: DateTime!
-    rating: Int!
+type Review {
+  id: ID!
+  author: User!
+  category: Category!
+  header: String!
+  text: String!
+  filename: String!
+  publicationDate: DateTime
+  rating: Int!
+  comments: [Comment]!
 }
 
 input InputReview {
-    category: ID!
-    header: String!
-    text: String!
-    filename: String!
-    rating: Int!
+  category: ID!
+  header: String!
+  text: String!
+  filename: String!
+  rating: Int!
 }
 
 input ModifyReview {
-    header: String
-    text: String
-    rating: Int
+  header: String
+  text: String
+  rating: Int
 }
 
-type Query{
-    reviews: [Review]
-    review(id: ID!): Review
-    reviewsByCategory(categoryId: ID!): [Review]
-    reviewsByAuthor(authorId: ID!): [Review]
-    reviewsByRating(rating: Int!): [Review]
+type Query {
+  reviews: [Review]
+  review(id: ID!): Review
+  reviewsByCategory(categoryId: ID!): [Review]
+  reviewsByAuthor(authorId: ID!): [Review]
+  reviewsByRating(rating: Int!): [Review]
 }
 
 type Mutation {
-    addReview(input: InputReview!): Review
-    updateReview(id: ID!, input: ModifyReview!): Review
-    deleteReview(id: ID!): Review
+  addReview(input: InputReview!): Review
+  updateReview(id: ID!, input: ModifyReview!): Review
+  deleteReview(id: ID!): Review
 }

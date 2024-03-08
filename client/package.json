@@ -10,7 +10,10 @@
     "@types/node": "^16.18.86",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
+    "mobx": "^6.12.0",
+    "mobx-react": "^9.1.0",
     "nth-check": "^2.1.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
@@ -47,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-datepicker": "^6.0.3"
+    "@types/react-datepicker": "^6.0.3",
+    "@types/bcryptjs": "^2.4.6"
   }
 }
