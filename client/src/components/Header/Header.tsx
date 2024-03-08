@@ -39,8 +39,7 @@ const Header = () => {
               <Nav.Link as={Link} to={"/tarjoukset"}>Tarjoukset</Nav.Link>
               <Nav.Link as={Link} to={"/profiili"}>Profiili</Nav.Link>
               <Nav.Link as={Link} to={"/meista"}>Meistä</Nav.Link>
-              {/* Actual path should be added later */}
-              <Nav.Link as={Link} to={"/"}>Ilmoitukset</Nav.Link>
+              <Nav.Link as={Link} to={"/ilmoitukset"}>Ilmoitukset</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link onClick={logout}>Kirjaudu ulos</Nav.Link>

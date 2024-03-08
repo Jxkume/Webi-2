@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { Home, Register, Login, ForgottenPassword, Reviews, NewReview, ViewReview, Profile} from './pages';
+import { Home, Register, Login, ForgottenPassword, Reviews, NewReview, ViewReview, Profile, Notifications} from './pages';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
             <Route path="/" element={<Home/>}></Route>
             <Route path="/uusiArvostelu" element={<NewReview/>}></Route>
             <Route path="/nakymaArvostelu/:id" element={<ViewReview/>}></Route>
+            <Route path="/ilmoitukset" element={<Notifications/>}></Route>
           </Routes>
         </Router>
       <Footer />
