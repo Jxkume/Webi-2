@@ -1,4 +1,4 @@
-import { Review, User, Comment, Offer, UserInput } from "../../types/DBtypes";
+import { Review, User, Comment, Offer, UserInput, Notification } from "../../types/DBtypes";
 import fetchData from "../../functions/fetchData";
 import { UserResponse, LoginResponse } from "../../types/MessageTypes";
 import MyContext from "../../types/MyContext";
@@ -6,6 +6,13 @@ import {isLoggedIn, isAdmin} from "../../functions/authorize";
 
 export default {
   //Remember to add notification
+  Notification: {
+    receiver: async (parent: Notification) => {
+      return await fetchData<User>(
+        `${process.env.AUTH_URL}/users/${parent.receiver}`,
+      );
+    }
+  },
   Review: {
     author: async (parent: Review) => {
       return await fetchData<User>(

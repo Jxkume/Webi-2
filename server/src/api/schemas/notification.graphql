@@ -5,6 +5,7 @@ type Notification{
   receiver: User!
   text: String!
   date: DateTime!
+  expire: DateTime!
 }
 
 input InputNotification {
