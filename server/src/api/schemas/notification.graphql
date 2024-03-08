@@ -4,7 +4,7 @@ type Notification{
   id: ID!
   receiver: User!
   text: String!
-  date: DateTime!
+  publicationDate: DateTime!
   expire: DateTime!
 }
 

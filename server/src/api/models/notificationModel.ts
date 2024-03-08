@@ -17,6 +17,11 @@ const notificationModel = new mongoose.Schema<Notification>({
     type: Date,
     required: true,
   },
+
+  expire: {
+    type: Date,
+    required: true,
+  },
 });
 
 export default mongoose.model<Notification>('Notification', notificationModel);

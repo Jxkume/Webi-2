@@ -59,6 +59,7 @@ type Notification = Partial<Document> & {
   receiver: User | Types.ObjectId;
   text: string;
   publicationDate: Date;
+  expire: Date;
 };
 
 export {
