@@ -94,6 +94,7 @@ const NewReview = () => {
         
         if (responseData.errors !== undefined) {
             setReviewCreatedResponse(responseData.errors[0].message);
+            alert('Ainoastaan kirjautuneet käyttäjät voivat lisätä arvosteluja!')
         } else {
             setReviewCreatedResponse(responseData);
             alert('Arvostelu luotu onnistuneesti!');

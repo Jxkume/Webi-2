@@ -10,9 +10,12 @@ const ReviewView = () => {
     const [showCommentForm, setShowCommentForm] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
     const fetchReview = async () => {
         const token = getCookie('token'); 
+        setIsLoggedIn(!!token); 
         const response = await fetch('http://localhost:3000/graphql', {
             method: 'POST',
             headers: { 
@@ -103,7 +106,9 @@ const ReviewView = () => {
                     <p>Tekijä: {(review as { author: { username: string } }).author.username}</p>
                     <p>Kuva: {(review as { filename: string }).filename.endsWith('.png') ? (review as { filename: string }).filename : 'None'}</p>
                     <p>Julkaisupäivämäärä: {(review as { publicationDate: string }).publicationDate}</p>
-                    <Button variant="primary" className="mt-3" onClick={handleCommentButtonClick}>Uusi kommentti</Button>
+                    {isLoggedIn && (
+                        <Button variant="primary" className="mt-3" onClick={handleCommentButtonClick}>Uusi kommentti</Button>
+                    )}
                     {showCommentForm && (
                         <Form onSubmit={handleCommentSubmit}>
                             <Form.Group controlId="comment">
