@@ -1,8 +1,9 @@
-import { Review } from "../../types/DBtypes";
+import { Review, User } from "../../types/DBtypes";
 import MyContext from "../../types/MyContext";
 import { isAdmin } from "../../functions/authorize";
 import CategoryModel from "../models/categoryModel";
 import ReviewModel from "../models/reviewModel";
+import fetchData from "../../functions/fetchData";
 
 export default {
   Review: {
@@ -10,9 +11,39 @@ export default {
       return await CategoryModel.findById(parent.category);
     },
   },
+  User: {
+    isFollowing: async (parent: User) => {
+      //Not sure if this is the right way to do it
+      return await CategoryModel.find({ _id: { $in: parent.isFollowing } });
+    },
+  },
   Query: {
     categories: async () => {
       return await CategoryModel.find();
+    },
+
+    categoriesByUser: async (_parent: undefined, args: { userId: string }) => {
+      return await fetchData<User>(
+        `${process.env.AUTH_URL}/users/${args.userId}/categories`
+      );
+    },
+    categoryById: async (_parent: undefined, args: { id: string }) => {
+      return await CategoryModel.findById(args.id);
+    },
+
+    searchCategories: async (
+      _parent: undefined,
+      { searchTerm }: { searchTerm: string }
+    ) => {
+      try {
+        const categories = await CategoryModel.find({
+          name: { $regex: searchTerm, $options: "i" },
+        });
+        return categories;
+      } catch (error) {
+        console.error("Error searching categories:", error);
+        throw new Error("Failed to search categories");
+      }
     },
   },
   Mutation: {

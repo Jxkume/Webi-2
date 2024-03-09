@@ -6,6 +6,7 @@ type User = Partial<Document> & {
   email: string;
   password: string;
   role: "user" | "admin";
+  isFollowing: Category[] | Types.ObjectId[];
 };
 
 type Category = Partial<Document> & {
@@ -53,6 +54,14 @@ type TokenContent = {
   user: Omit<User, "password">;
 };
 
+type Notification = Partial<Document> & {
+  id: Types.ObjectId | string;
+  receiver: User | Types.ObjectId;
+  text: string;
+  publicationDate: Date;
+  expire: Date;
+};
+
 export {
   User,
   Category,
@@ -63,4 +72,5 @@ export {
   UserOutput,
   UserInput,
   LoginUser,
+  Notification,
 };

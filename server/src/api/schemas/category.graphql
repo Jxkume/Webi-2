@@ -1,10 +1,13 @@
 type Category {
-  id: ID!
+  _id: ID!
   name: String!
 }
 
 type Query {
   categories: [Category]
+  categoryById(id: ID!): Category
+  categoriesByUser(userId: ID!): [Category]
+  searchCategories(searchTerm: String!): [Category]
 }
 
 type Mutation {

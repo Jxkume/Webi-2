@@ -3,6 +3,7 @@ import offerResolver from "./offerResolver";
 import categoryResolver from "./categoryResolver";
 import userResolver from "./userResolver";
 import reviewResolver from "./reviewResolver";
+import notificationResolver from "./notificationResolver";
 
 export default [
   commentResolver,
@@ -10,4 +11,5 @@ export default [
   categoryResolver,
   userResolver,
   reviewResolver,
+  notificationResolver
 ];

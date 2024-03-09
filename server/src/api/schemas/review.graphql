@@ -32,6 +32,7 @@ type Query {
   reviewsByCategory(categoryId: ID!): [Review]
   reviewsByAuthor(authorId: ID!): [Review]
   reviewsByRating(rating: Int!): [Review]
+  searchReviews(searchTerm: String!): [Review]
 }
 
 type Mutation {

@@ -3,6 +3,7 @@ type User {
   username: String!
   email: String!
   role: String
+  isFollowing: [Category!]!
 }
 
 type LoginResponse {
@@ -37,12 +38,15 @@ input UserModify {
 type Query {
   users: [User]
   userById(id: ID!): User
+  usersByCategory(categoryId: ID!): [User]
   checkToken: UserResponse
 }
 
 type Mutation {
   login(credentials: Credentials!): LoginResponse
   register(user: UserInput!): UserResponse
+  addCategoryToUser(categoryId: ID!): User
+  removeCategoryFromUser(categoryId: ID!): User
   updateUser(user: UserModify!): UserResponse
   deleteUser: UserResponse
   updateUserAsAdmin(user: UserModify!, id: ID!): UserResponse

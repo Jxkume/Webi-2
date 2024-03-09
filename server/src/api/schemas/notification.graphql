@@ -1,0 +1,33 @@
+scalar DateTime
+
+type Notification {
+  id: ID!
+  receiver: User!
+  text: String!
+  publicationDate: DateTime!
+  expire: DateTime!
+}
+
+input InputNotification {
+  receiver: ID!
+  text: String!
+}
+
+input InputNotificationArray {
+  receiver: [ID!]!
+  text: String!
+}
+
+type Query {
+  notificationsByReceiver(receiverId: ID!): [Notification]
+  searchNotifications(searchTerm: String!): [Notification]
+}
+
+type Mutation {
+  sendNotificationToManyUsers(
+    userIds: [String!]!
+    text: String!
+  ): [Notification]
+  addNotification(input: InputNotification!): Notification
+  deleteNotification(id: ID!): Notification
+}

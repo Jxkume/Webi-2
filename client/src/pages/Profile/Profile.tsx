@@ -2,10 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Profile.css';
-import { useState, useEffect } from "react";
-import { getCookie } from "typescript-cookie";
-import { get } from "http";
-import { User, UserInput } from "../../Types/User";
+import { useState } from "react";
 import userStore from "../../Store/UserStore";
 import bcrypt from 'bcryptjs';
 

@@ -26,6 +26,7 @@ type Category {
 type Query {
   offerById(id: ID!): Offer
   offers: [Offer]
+  searchOffers(searchTerm: String!): [Offer]
 }
 
 type Mutation {

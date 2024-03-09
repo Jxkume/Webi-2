@@ -5,14 +5,17 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getCookie } from 'typescript-cookie';
 import './Reviews.css';
+import { set } from 'mobx';
 
 const ReviewsPage = () => {
 
     const [reviews, setReviews] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const fetchReviews = async () => {
-            const token = getCookie('token'); 
+            const token = getCookie('token');
+            setIsLoggedIn(!!token); 
             const response = await fetch('http://localhost:3000/graphql', {
                 method: 'POST',
                 headers: { 
@@ -45,9 +48,11 @@ const ReviewsPage = () => {
                         </div>
                         
                     ))}
-                    <Button onClick={() => window.location.href = '/uusiArvostelu'}>
-                        Lisää uusi arvostelu!
-                    </Button>
+                    {isLoggedIn && (
+                        <Button onClick={() => window.location.href = '/uusiArvostelu'}>
+                            Lisää uusi arvostelu!
+                        </Button>
+                    )}
                 </Col>
             </Row>
         </Container>

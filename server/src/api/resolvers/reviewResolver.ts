@@ -24,6 +24,20 @@ export default {
     reviewsByRating: async (_parent: undefined, args: { rating: number }) => {
       return await reviewModel.find({ rating: args.rating });
     },
+    searchReviews: async (
+      _parent: undefined,
+      { searchTerm }: { searchTerm: string }
+    ) => {
+      try {
+        const reviews = await reviewModel.find({
+          header: { $regex: searchTerm, $options: "i" },
+        });
+        return reviews;
+      } catch (error) {
+        console.error("Error searching reviews:", error);
+        throw new Error("Failed to search reviews");
+      }
+    },
   },
   Review: {
     comments: async (parent: any) => {
