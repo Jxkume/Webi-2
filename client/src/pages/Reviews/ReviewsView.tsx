@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getCookie } from 'typescript-cookie';
 import { Container, Row, Col, Button, Form} from 'react-bootstrap';
 import './ReviewsView.css';
+import { User } from '../../Types/User';
 
 const ReviewView = () => {
     const { id } = useParams();
@@ -11,35 +12,39 @@ const ReviewView = () => {
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [author, setAuthor] = useState(null);
 
 
     const fetchReview = async () => {
-        const token = getCookie('token'); 
-        setIsLoggedIn(!!token); 
+        const token = getCookie('token');
+        setIsLoggedIn(!!token);
         const response = await fetch('http://localhost:3000/graphql', {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 query: `
-                    query Review($id: ID!) { 
-                        review(id: $id) { 
-                            id 
-                            header 
-                            text 
-                            filename 
-                            publicationDate 
-                            rating 
-                            author { username } 
+                    query Review($id: ID!) {
+                        review(id: $id) {
+                            id
+                            header
+                            text
+                            filename
+                            publicationDate
+                            rating
+                            author {
+                              username
+                              id
+                            }
                             category { id }
                             comments {
                                 id
                                 text
                                 author { username }
                             }
-                        } 
+                        }
                     }`,
                 variables: {
                     id
@@ -49,6 +54,7 @@ const ReviewView = () => {
         const responseData = await response.json();
         setReview(responseData.data.review);
         setComments(responseData.data.review.comments);
+        setAuthor(responseData.data.review.author);
     };
 
     useEffect(() => {
@@ -62,8 +68,8 @@ const ReviewView = () => {
     const handleCommentChange = (event: any) => {
         setCommentText(event.target.value);
     }
-    
- 
+
+
     const handleCommentSubmit = async (event: any) => {
         event.preventDefault();
         if (commentText.trim() === '') {
@@ -73,24 +79,42 @@ const ReviewView = () => {
         const token = getCookie('token');
         const response = await fetch('http://localhost:3000/graphql', {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ 
-                query: `mutation { createComment(input: { text: "${commentText}", post: "${id}" }) { id } }` 
+            body: JSON.stringify({
+                query: `mutation { createComment(input: { text: "${commentText}", post: "${id}" }) { id } }`
             }),
         });
         const responseData = await response.json();
         if (responseData.data.createComment.id) {
             setCommentText('');
             setShowCommentForm(false);
-            fetchReview(); 
+            fetchReview();
+            sendNotification()
         } else {
             alert('Failed to create comment');
         }
     }
 
+    const sendNotification = async () => {
+      const authorId = (author as unknown as User).id;
+      const notificationMutation = `
+        mutation {addNotification(input: {receiver: "${authorId}", text: "Uusi kommentti arvosteluusi"}){
+          id
+        }}
+      `;
+      const request = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: notificationMutation }),
+      });
+      const response = await request.json();
+      console.log(response);
+    };
 
     if (!review) {
         return <div>Loading...</div>;

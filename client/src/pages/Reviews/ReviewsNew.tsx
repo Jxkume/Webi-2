@@ -16,6 +16,7 @@ const NewReview = () => {
         reviewFile: '',
     });
 
+    //const [categoryName, setCategoryName] = useState('');
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -96,14 +97,14 @@ const NewReview = () => {
             setReviewCreatedResponse(responseData.errors[0].message);
             alert('Ainoastaan kirjautuneet käyttäjät voivat lisätä arvosteluja!')
         } else {
-            sendNotifications();
+            sendNotifications(responseData.data.addReview.category.name);
             setReviewCreatedResponse(responseData);
             alert('Arvostelu luotu onnistuneesti!');
-            //window.location.href = '/arvostelut';
+            window.location.href = '/arvostelut';
         }
   };
 
-  const sendNotifications = async () => {
+  const sendNotifications = async (categoryName: string) => {
     const category = inputs.reviewCategory;
     let userIds = [];
     const getUsersQuery = `
@@ -121,7 +122,7 @@ const NewReview = () => {
     userIds = getUsersResponse.data.usersByCategory.map((user: {id: string}) => user.id);
 
     const sendNotificationsMutation = `
-      mutation {sendNotificationToManyUsers(userIds: "${userIds}", text: "Uusi arvostelu lisätty!") {
+      mutation {sendNotificationToManyUsers(userIds: "${userIds}", text: "Uusi arvostelu kategoriassa ${categoryName}!") {
         id
       }}
     `;
@@ -138,7 +139,7 @@ const NewReview = () => {
     <div className="form-container">
         <Form onSubmit={createReview}>
         <Form.Group controlId="reviewName">
-            <Form.Label>Tuotteen nimen</Form.Label>
+            <Form.Label>Tuotteen nimi</Form.Label>
             <Form.Control type="text" placeholder="Syötä tuotteen nimen" onChange={updateInput("reviewName")}/>
         </Form.Group>
 
