@@ -13,11 +13,20 @@ input InputNotification {
   text: String!
 }
 
+input InputNotificationArray{
+  receiver: [ID!]!
+  text: String!
+}
+
 type Query {
   notificationsByReceiver(receiverId: ID!): [Notification]
 }
 
 type Mutation {
+  sendNotificationToManyUsers(
+    userIds: [String!]!
+    text: String!
+  ): [Notification]
   addNotification(input: InputNotification!): Notification
   deleteNotification(id: ID!): Notification
 }

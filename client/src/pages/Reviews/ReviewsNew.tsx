@@ -18,7 +18,7 @@ const NewReview = () => {
 
     const [categories, setCategories] = useState([]);
 
-    useEffect(() => {   
+    useEffect(() => {
         const fetchCategories = async () => {
             const response = await fetch('http://localhost:3000/graphql', {
                 method: 'POST',
@@ -30,7 +30,7 @@ const NewReview = () => {
         };
         fetchCategories();
     }, []);
-    
+
 
     const [reviewCreatedResponse, setReviewCreatedResponse] = useState(null);
 
@@ -78,11 +78,11 @@ const NewReview = () => {
             }
         };
 
-        const token = getCookie('token'); 
+        const token = getCookie('token');
 
         const response = await fetch('http://localhost:3000/graphql', {
         method: 'POST',
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
 
@@ -91,16 +91,49 @@ const NewReview = () => {
      });
         const responseData = await response.json();
         console.log(responseData);
-        
+
         if (responseData.errors !== undefined) {
             setReviewCreatedResponse(responseData.errors[0].message);
             alert('Ainoastaan kirjautuneet käyttäjät voivat lisätä arvosteluja!')
         } else {
+            sendNotifications();
             setReviewCreatedResponse(responseData);
             alert('Arvostelu luotu onnistuneesti!');
-            window.location.href = '/arvostelut';
-        }  
+            //window.location.href = '/arvostelut';
+        }
   };
+
+  const sendNotifications = async () => {
+    const category = inputs.reviewCategory;
+    let userIds = [];
+    const getUsersQuery = `
+      query {usersByCategory(categoryId: "${category}") {
+        id
+      }}
+    `;
+    const getUsersRequest = await fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: getUsersQuery }),
+    });
+    const getUsersResponse = await getUsersRequest.json();
+    console.log(getUsersResponse);
+    userIds = getUsersResponse.data.usersByCategory.map((user: {id: string}) => user.id);
+
+    const sendNotificationsMutation = `
+      mutation {sendNotificationToManyUsers(userIds: "${userIds}", text: "Uusi arvostelu lisätty!") {
+        id
+      }}
+    `;
+    const sendNotificationsRequest = await fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: sendNotificationsMutation }),
+    });
+    const sendNotificationsResponse = await sendNotificationsRequest.json();
+    console.log(sendNotificationsResponse);
+  }
+
   return (
     <div className="form-container">
         <Form onSubmit={createReview}>
@@ -114,7 +147,7 @@ const NewReview = () => {
             <Form.Control as="select" onChange={updateInput("reviewCategory")}>
                 {categories.map((category: { id: string, name: string }) => (
                     <option value={category.id}>{category.name}</option>
-                ))} 
+                ))}
             </Form.Control>
         </Form.Group>
 

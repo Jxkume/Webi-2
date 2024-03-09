@@ -36,6 +36,23 @@ export default {
       console.log(args.input);
       return await notificationModel.create(args.input);
     },
+    sendNotificationToManyUsers: async(
+      _parent: undefined,
+      args: {userIds: string[], text: string},
+    ) => {
+      const publicationDate = new Date();
+      const expire = new Date();
+      expire.setDate(expire.getDate() + 14);
+      const notifications = args.userIds.map((userId) => {
+        return {
+          receiver: userId,
+          text: args.text,
+          publicationDate: publicationDate,
+          expire: expire,
+        }
+      });
+      return await notificationModel.insertMany(notifications);
+    },
     deleteNotification: async(
       _parent: undefined,
       args: {id: string},
