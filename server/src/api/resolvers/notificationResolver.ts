@@ -8,27 +8,42 @@ export default {
   Query: {
     notificationsByReceiver: async (
       _parent: undefined,
-      args: {receiverId: string},
+      args: { receiverId: string },
       context: MyContext
     ) => {
       isLoggedIn(context);
-      if(context.userdata?.user.id !== args.receiverId) {
-        throw new GraphQLError('Not authenticated', {
+      if (context.userdata?.user.id !== args.receiverId) {
+        throw new GraphQLError("Not authenticated", {
           extensions: {
-            code: 'UNAUTHORIZED',
+            code: "UNAUTHORIZED",
             http: {
               status: 401,
             },
           },
         });
       }
-      return await notificationModel.find({receiver: args.receiverId});
+      return await notificationModel.find({ receiver: args.receiverId });
+    },
+
+    searchNotifications: async (
+      _parent: undefined,
+      { searchTerm }: { searchTerm: string }
+    ) => {
+      try {
+        const notifications = await notificationModel.find({
+          text: { $regex: searchTerm, $options: "i" },
+        });
+        return notifications;
+      } catch (error) {
+        console.error("Error searching notifications:", error);
+        throw new Error("Failed to search notifications");
+      }
     },
   },
   Mutation: {
-    addNotification: async(
+    addNotification: async (
       _parent: undefined,
-      args: {input: Omit<Notification, 'id'>},
+      args: { input: Omit<Notification, "id"> }
     ) => {
       args.input.publicationDate = new Date();
       args.input.expire = new Date();
@@ -36,9 +51,9 @@ export default {
       console.log(args.input);
       return await notificationModel.create(args.input);
     },
-    sendNotificationToManyUsers: async(
+    sendNotificationToManyUsers: async (
       _parent: undefined,
-      args: {userIds: string[], text: string},
+      args: { userIds: string[]; text: string }
     ) => {
       const publicationDate = new Date();
       const expire = new Date();
@@ -49,17 +64,17 @@ export default {
           text: args.text,
           publicationDate: publicationDate,
           expire: expire,
-        }
+        };
       });
       return await notificationModel.insertMany(notifications);
     },
-    deleteNotification: async(
+    deleteNotification: async (
       _parent: undefined,
-      args: {id: string},
+      args: { id: string },
       context: MyContext
     ) => {
       isLoggedIn(context);
       return await notificationModel.findByIdAndDelete(args.id);
-    }
-  }
-}
+    },
+  },
+};

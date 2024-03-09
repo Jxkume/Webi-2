@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import SearchResults from './components/Header/SearchResults';
 import { Home, Register, Login, ForgottenPassword, Reviews, NewReview, ViewReview, Profile, Notifications} from './pages';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App"> 
         <Router>
         <Header />
           <Routes>
@@ -23,6 +24,7 @@ function App() {
             <Route path="/uusiArvostelu" element={<NewReview/>}></Route>
             <Route path="/nakymaArvostelu/:id" element={<ViewReview/>}></Route>
             <Route path="/ilmoitukset" element={<Notifications/>}></Route>
+            <Route path="/haku/:searchTerm" element={<SearchResults />} />
           </Routes>
         </Router>
       <Footer />

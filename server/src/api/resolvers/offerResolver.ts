@@ -20,6 +20,18 @@ export default {
         throw new Error("Failed to get offers");
       }
     },
+
+    searchOffers: async (_: any, { searchTerm }: { searchTerm: string }) => {
+      try {
+        const offers = await offerModel.find({
+          header: { $regex: searchTerm, $options: "i" },
+        });
+        return offers;
+      } catch (error) {
+        console.error("Error searching offers:", error);
+        throw new Error("Failed to search offers");
+      }
+    },
   },
 
   Mutation: {

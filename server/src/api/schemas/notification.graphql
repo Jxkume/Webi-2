@@ -1,6 +1,6 @@
 scalar DateTime
 
-type Notification{
+type Notification {
   id: ID!
   receiver: User!
   text: String!
@@ -13,13 +13,14 @@ input InputNotification {
   text: String!
 }
 
-input InputNotificationArray{
+input InputNotificationArray {
   receiver: [ID!]!
   text: String!
 }
 
 type Query {
   notificationsByReceiver(receiverId: ID!): [Notification]
+  searchNotifications(searchTerm: String!): [Notification]
 }
 
 type Mutation {

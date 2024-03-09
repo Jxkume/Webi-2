@@ -4,9 +4,10 @@ type Category {
 }
 
 type Query {
-  categories: [Category],
+  categories: [Category]
   categoryById(id: ID!): Category
   categoriesByUser(userId: ID!): [Category]
+  searchCategories(searchTerm: String!): [Category]
 }
 
 type Mutation {

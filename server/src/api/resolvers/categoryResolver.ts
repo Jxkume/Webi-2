@@ -15,20 +15,35 @@ export default {
     isFollowing: async (parent: User) => {
       //Not sure if this is the right way to do it
       return await CategoryModel.find({ _id: { $in: parent.isFollowing } });
-    }
+    },
   },
   Query: {
     categories: async () => {
       return await CategoryModel.find();
     },
-    //Returns categories followed by user, calls userCategoriesGet from auth service
-    categoriesByUser: async (_parent: undefined, args: {userId: string}) => {
+
+    categoriesByUser: async (_parent: undefined, args: { userId: string }) => {
       return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${args.userId}/categories`,
+        `${process.env.AUTH_URL}/users/${args.userId}/categories`
       );
     },
     categoryById: async (_parent: undefined, args: { id: string }) => {
       return await CategoryModel.findById(args.id);
+    },
+
+    searchCategories: async (
+      _parent: undefined,
+      { searchTerm }: { searchTerm: string }
+    ) => {
+      try {
+        const categories = await CategoryModel.find({
+          name: { $regex: searchTerm, $options: "i" },
+        });
+        return categories;
+      } catch (error) {
+        console.error("Error searching categories:", error);
+        throw new Error("Failed to search categories");
+      }
     },
   },
   Mutation: {

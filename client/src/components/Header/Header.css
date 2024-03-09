@@ -9,7 +9,7 @@
   
   .header .me-auto {
     flex-grow: 1; 
-    justify-content: center; 
+    justify-content: center;
   }
 
 .header {
@@ -32,4 +32,9 @@
   .form-control {
     max-width: 200px;
   }
+  
+  .register-link {
+    margin-left: auto;
+  }
+ 
   
