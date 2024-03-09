@@ -1,0 +1,31 @@
+.notification {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.notificationDate {
+  text-align: left;
+  font-size: 0.8em;
+  font-weight: lighter;
+}
+
+.notification button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFD6D6;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification button:hover {
+  background-color: #FFA5A5;
+  color: #000;
+}

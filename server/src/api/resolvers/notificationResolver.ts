@@ -39,7 +39,9 @@ export default {
     deleteNotification: async(
       _parent: undefined,
       args: {id: string},
+      context: MyContext
     ) => {
+      isLoggedIn(context);
       return await notificationModel.findByIdAndDelete(args.id);
     }
   }
