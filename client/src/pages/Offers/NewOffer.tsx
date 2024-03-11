@@ -2,37 +2,82 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './NewOfferPage.css'; // Make sure to create a corresponding CSS file
+import './NewOffer.css';
+import {getCookie} from "typescript-cookie";
 
 const NewOffer: React.FC = () => {
-  const [productName, setProductName] = useState('');
-  const [store, setStore] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
-  const [deletionDate, setDeletionDate] = useState<Date | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [input, setInput] = useState({
+    productName: '',
+    store: '',
+    deletionDate: new Date(),
+    additionalInfo: '',
+  });
+
+  const [offerResponse, setOfferResponse] = useState('');
+
+  const createOffer = async (event: any) => {
     event.preventDefault();
-    const offerData = {
-      productName,
-      store,
-      additionalInfo,
-      deletionDate,
+    if (input.productName.trim() === '' || input.store.trim() === '') {
+      alert('Täytä kaikki kentät!');
+      return;
+    }
+    const mutation = `
+      mutation AddOffer($input: InputOffer!) {
+        addOffer(input: $input) {
+          id
+          productName
+          store
+          deletionDate
+          additionalInfo
+        }
+  }`;
+
+    const variables = {
+      input: {
+        productName: input.productName,
+        store: input.store,
+        deletionDate: input.deletionDate,
+        additionalInfo: input.additionalInfo,
+      },
     };
-    console.log(offerData);
+
+    const token = getCookie('token');
+
+    const response = await fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({query: mutation, variables}),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+
+    if (responseData.errors !== undefined) {
+      setOfferResponse(responseData.errors[0].message);
+      alert('Ilmoituksen luonti epäonnistui');
+    } else {
+      //sendNotification();
+      setOfferResponse(responseData);
+      alert('Ilmoitus luotu!');
+      window.location.href = '/tarjoukset';
+    }
   };
+
 
   return (
     <Container>
       <Row className="justify-content-center">
         <Col md={8}>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={createOffer}>
             <Form.Group className="mb-3" controlId="productName">
               <Form.Label>Tuotteen nimi ja valmistaja</Form.Label>
               <Form.Control
                 type="text"
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                required
+                placeholder={"Tuotteen nimi ja valmistaja"}
+                value={input.productName}
               />
             </Form.Group>
 
@@ -42,9 +87,8 @@ const NewOffer: React.FC = () => {
                   <Form.Label>Kauppa</Form.Label>
                   <Form.Control
                     type="text"
-                    value={store}
-                    onChange={(e) => setStore(e.target.value)}
-                    required
+                    placeholder="Kaupan nimi"
+                    value={input.store}
                   />
                 </Form.Group>
               </Col>
@@ -52,8 +96,8 @@ const NewOffer: React.FC = () => {
                 <Form.Group className="mb-3" controlId="deletionDate">
                   <Form.Label>Ilmoituksen poistopäivä</Form.Label>
                   <DatePicker
-                    selected={deletionDate}
-                    onChange={(date: Date) => setDeletionDate(date)}
+                    selected={input.deletionDate}
+                    onChange={(date: Date) => setInput({...input, deletionDate: date})}
                     dateFormat="dd.MM.yyyy"
                     minDate={new Date()}
                     placeholderText="Valitse päivä"
@@ -62,16 +106,6 @@ const NewOffer: React.FC = () => {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Form.Group className="mb-3" controlId="additionalInfo">
-              <Form.Label>Lisätietoja</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={additionalInfo}
-                onChange={(e) => setAdditionalInfo(e.target.value)}
-              />
-            </Form.Group>
 
             <Button variant="primary" type="submit">
               Lähetä ilmoitus

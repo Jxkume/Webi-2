@@ -1,15 +1,61 @@
-import React from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
-import './OffersList.css'; 
+import React, {useEffect} from 'react';
+import {Container, Row, Col, Card, ListGroup, Button} from 'react-bootstrap';
+import './OffersList.css';
 import { Link } from 'react-router-dom';
+import {getCookie} from "typescript-cookie";
 
-const OffersList: React.FC = () => {
-  // Testilista tarjouksista
-  const offers = [
-    { id: 1, title: '80% ALE mehusta', user: 'käyttäjä2' },
-    { id: 2, title: '5% ALE taffel sipsit', user: 'käyttäjä4' },
-    { id: 3, title: 'HUKKA-ALE vihanneksia', user: 'käyttäjä2' },
-  ];
+const OffersList = () => {
+
+  const [offers, setOffers] = React.useState([]);
+  //const popular = [
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      const token = getCookie('token');
+      setIsLoggedIn(!!token);
+
+      console.log('Request details:', {
+        url: 'http://localhost:3000/graphql',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({query: `{ offers { id header user } }`}),
+      });
+
+      const response = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${token}'
+        },
+        body: JSON.stringify({query: `
+        { offers {
+          id
+          header
+          author {
+            id
+            username
+          }
+        }`}),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+
+      if (!responseData.data) {
+        console.log('Server response:', responseData);
+        throw new Error('Server response does not include data');
+      }
+      setOffers(responseData.data.offers);
+    };
+    fetchOffers();
+  },[]);
 
   // Testilista suosituista tarjouksista
   const popular = [
@@ -19,15 +65,21 @@ const OffersList: React.FC = () => {
   return (
     <Container>
       <Row className="my-4">
+        <Col>
+          {isLoggedIn && (
+              <Button onClick={() => window.location.href = '/uusitarjous'}>
+                Lisää tarjous
+              </Button>
+          )}        </Col>
         <Col xs={12} md={8}>
           <h2>Tarjoukset</h2>
           <hr />
-          {offers.map((offer) => (
+          {offers.map((offer: { id: string, header: string, author: {username: string} }) => (
             <Card key={offer.id} className="my-3">
               <Card.Body>
-                <Card.Title>{offer.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{offer.user}</Card.Subtitle>
-                <Link to={"/tarjous"}>Lue tarjous →</Link>
+                <Card.Title>{offer.header}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">{offer.author.username}</Card.Subtitle>
+                <Link to={`/tarjous/${offer.id}`}>Lue tarjous →</Link>
               </Card.Body>
             </Card>
           ))}
