@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import SearchResults from './components/Header/SearchResults';
+import SearchResults from './pages/Home/SearchResults';
 import { Home, Register, Login, ForgottenPassword, OffersList, Offer, NewOffer, Reviews, NewReview, ViewReview, Profile, Notifications} from './pages';
 
 function App() {

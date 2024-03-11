@@ -36,6 +36,11 @@ const ReviewsPage = () => {
             <Row className="justify-content-center">
                 <Col md={6} className="reviews-col">
                     <h1 className='header-title'>Arvostelut</h1>
+                    {isLoggedIn && (
+                        <Button className="newreviewbutton" onClick={() => window.location.href = '/uusiArvostelu'}>
+                            Lisää uusi arvostelu!
+                        </Button>
+                    )}
                     {reviews.map((review: { id: string, header: string, text: string, rating: number, author: { username: string } }) => (
                         <div key={review.id} className="review-box">
                             <h2>{review.header}</h2>
@@ -48,11 +53,6 @@ const ReviewsPage = () => {
                         </div>
                         
                     ))}
-                    {isLoggedIn && (
-                        <Button onClick={() => window.location.href = '/uusiArvostelu'}>
-                            Lisää uusi arvostelu!
-                        </Button>
-                    )}
                 </Col>
             </Row>
         </Container>

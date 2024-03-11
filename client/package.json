@@ -52,6 +52,5 @@
   "devDependencies": {
     "@types/react-datepicker": "^6.0.3",
     "@types/bcryptjs": "^2.4.6"
-
-  },
+  }
 }
