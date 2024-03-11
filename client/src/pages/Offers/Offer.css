@@ -1,0 +1,20 @@
+.Container {
+    background: #fff;
+}
+
+h2, h3 {
+    color: #333; 
+  }
+  
+  .Card {
+    margin-bottom: 20px;
+  }
+  
+  .ListGroup {
+    margin-top: 20px;
+  }
+  
+  .ListGroup-Item {
+    background-color: #f8f9fa;
+    border: none; 
+  }
