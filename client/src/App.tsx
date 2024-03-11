@@ -28,8 +28,8 @@ function App() {
             <Route path="/ilmoitukset" element={<Notifications/>}></Route>
             <Route path="/haku/:searchTerm" element={<SearchResults />} />
         </Routes>
+            <Footer />
         </Router>
-      <Footer />
     </div>
   );
 }

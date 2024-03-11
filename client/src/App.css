@@ -1,0 +1,21 @@
+.content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.App {
+    position: relative;
+    min-height: 100vh;
+}
+
+.Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFD6D6;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+
+}
