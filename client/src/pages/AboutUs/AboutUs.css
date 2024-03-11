@@ -1,0 +1,26 @@
+.content-page {
+    padding-top: 50px;
+}
+
+.content-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.action-icons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.action-icons svg {
+    margin: 0 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.content-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+}

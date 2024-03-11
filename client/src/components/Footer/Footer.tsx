@@ -6,7 +6,7 @@ const Footer = () => {
   useEffect(() => {
     const handleScroll = () => {
       const footer = document.querySelector('.footer');
-      if (window.scrollY > 100) { 
+      if (window.scrollY > 100) {
         footer?.classList.add('show');
       } else {
         footer?.classList.remove('show');
@@ -19,7 +19,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer">
+    <footer className="Footer">
       <Container>
         <span>© 2024 Vera Finogenova, Jhon Rastrojo López & Korpi Tolonen</span>
       </Container>

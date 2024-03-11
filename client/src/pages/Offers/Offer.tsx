@@ -48,7 +48,6 @@ const Offer: React.FC = () => {
       }),
     });
     const responseData = await response.json();
-    console.log('Response data:', responseData);
     setOffer(responseData.data.offer);
     setComments(responseData.data.offer.comments);
     setAuthor(responseData.data.offer.user);
