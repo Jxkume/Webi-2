@@ -33,14 +33,14 @@ const OffersList = () => {
           'Authorization': 'Bearer ${token}'
         },
         body: JSON.stringify({query: `
-          { offers {
+        query{offers {
             id
             header
+            text
             author {
-              id
               username
             }
-          }`
+          }}`
         }),
       });
 

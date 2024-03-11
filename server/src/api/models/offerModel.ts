@@ -10,7 +10,7 @@ const offerSchema = new mongoose.Schema<Offer>({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
-    required: true,
+    //required: true,
   },
   header: {
     type: String,

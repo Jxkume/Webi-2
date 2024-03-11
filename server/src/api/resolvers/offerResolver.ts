@@ -2,6 +2,7 @@ import offerModel from "../models/offerModel";
 import { Offer } from "../../types/DBtypes";
 import MyContext from "../../types/MyContext";
 import { isLoggedIn } from "../../functions/authorize";
+import commentModel from "../models/commentModel"; // Import the commentModel
 
 export default {
   Query: {
@@ -33,6 +34,11 @@ export default {
       }
     },
   },
+  Offer: {
+    comments: async (parent: any) => {
+      return await commentModel.find({ offer: parent.id });
+    },
+  },
 
   Mutation: {
     createOffer: async (
@@ -50,6 +56,7 @@ export default {
             args.input.deletionDate.getDate() + 14
           );
         }
+        console.log("Offer input:", args.input);
         return await offerModel.create(args.input);
       } catch (error) {
         throw new Error("Failed to create offer");

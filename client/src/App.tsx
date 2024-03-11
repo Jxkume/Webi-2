@@ -14,7 +14,7 @@ function App() {
         <Header />
             <Routes>
             <Route path="/tarjoukset" element={<OffersList/>}></Route>
-            <Route path="/tarjous" element={<Offer/>}></Route>
+            <Route path="/tarjous/:id" element={<Offer/>}></Route>
             <Route path="/uusitarjous" element={<NewOffer/>}></Route>
             <Route path="/arvostelut" element={<Reviews/>}></Route>
             <Route path="/uusiArvostelu" element={<NewReview/>}></Route>

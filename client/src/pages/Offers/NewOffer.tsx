@@ -23,22 +23,26 @@ const NewOffer: React.FC = () => {
       return;
     }
     const mutation = `
-      mutation AddOffer($input: InputOffer!) {
-        addOffer(input: $input) {
-          id
-          productName
-          store
+      mutation CreateOffer($input: OfferInput!) {
+        createOffer(input: $input) {
+          author {
+            username
+          }
           deletionDate
-          additionalInfo
+          header
+          text
+          id
+          publicationDate
         }
-  }`;
+      }
+    `;
 
     const variables = {
       input: {
-        productName: input.productName,
-        store: input.store,
+        header: input.productName,
+        text: input.store,
         deletionDate: input.deletionDate,
-        additionalInfo: input.additionalInfo,
+        //additionalInfo: input.additionalInfo,
       },
     };
 
@@ -47,7 +51,7 @@ const NewOffer: React.FC = () => {
     const response = await fetch('http://localhost:3000/graphql', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({query: mutation, variables}),
@@ -78,6 +82,7 @@ const NewOffer: React.FC = () => {
                 type="text"
                 placeholder={"Tuotteen nimi ja valmistaja"}
                 value={input.productName}
+                onChange={(e) => setInput({...input, productName: e.target.value})}
               />
             </Form.Group>
 
@@ -89,6 +94,7 @@ const NewOffer: React.FC = () => {
                     type="text"
                     placeholder="Kaupan nimi"
                     value={input.store}
+                    onChange={(e) => setInput({...input, store: e.target.value})}
                   />
                 </Form.Group>
               </Col>

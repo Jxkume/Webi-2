@@ -121,7 +121,7 @@ const ReviewView = () => {
     }
 
     return (
-        <Container fluid>
+        <Container fluid className="reviewsnew-background">
             <Row className="justify-content-center">
                 <Col md={6} className="review-detail-container">
                     <h1>{(review as { header: string }).header}</h1>

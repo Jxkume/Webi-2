@@ -26,31 +26,35 @@ const Offer: React.FC = () => {
       },
       body: JSON.stringify({
         query: `
-          query Offer($id: ID!) {
-            offer(id: $id) {
-              id
-              header
-              text
-              author {
-                username
+            query OfferById($offerByIdId: ID!) {
+              offerById(id: $offerByIdId) {
                 id
-              }
-              comments {
-                id
+                header
                 text
-                author { username }
-              }
+                author {
+                  id
+                  username
+                }
+                comments {
+                  id
+                  text
+                  author { username }
             }
-          }`,
+          }
+        }`,
         variables: {
-          id
+          offerByIdId: id
         }
       }),
     });
     const responseData = await response.json();
-    setOffer(responseData.data.offer);
-    setComments(responseData.data.offer.comments);
-    setAuthor(responseData.data.offer.user);
+    const fetchedOffer = responseData.data.offerById; 
+    if (fetchedOffer) {
+      setOffer(fetchedOffer);
+      console.log(fetchedOffer.comments);
+      setComments(fetchedOffer.comments);
+      setAuthor(fetchedOffer.author);
+    }
   };
 
     useEffect(() => {
@@ -68,29 +72,29 @@ const Offer: React.FC = () => {
     const handleCommentSubmit = async (event: any) => {
       event.preventDefault();
       if (commentText.trim() === '') {
-        alert('Kommentti ei voi olla tyhjä');
-        return;
+          alert('Kommentti ei voi olla tyhjä!');
+          return;
       }
-
       const token = getCookie('token');
       const response = await fetch('http://localhost:3000/graphql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          query: `mutation { createComment(input: { text: "${commentText}", post: "${id}" }) { id } }`
-        }),
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              query: `mutation { createComment(input: { text: "${commentText}", post: "${id}" }) { id } }`
+          }),
       });
       const responseData = await response.json();
       if (responseData.data.createComment.id) {
-        setCommentText('');
-        fetchOffer();
-        sendNotification();
+          setCommentText('');
+          setShowCommentForm(false);
+          fetchOffer();
+          sendNotification()
       } else {
-        alert('Kommentin luominen epäonnistui');
-    }
+          alert('Failed to create comment');
+      }
   }
 
   const sendNotification = async () => {
@@ -141,13 +145,16 @@ const Offer: React.FC = () => {
               </form>
           )}
           <ListGroup>
-            {comments.map((comment: {id: string, text: string, author: {username: string}}) => (
-              <ListGroup.Item key={comment.id}>
-                <strong>{comment.author.username}</strong>
-                <p>{comment.text}</p>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+  {comments && comments.map((comment: {id: string, text: string, author: {username: string}}) => {
+    console.log('Rendering comment:', comment); // New log statement
+    return (
+      <ListGroup.Item key={comment.id}>
+        <strong>{comment.author.username}</strong>
+        <p>{comment.text}</p>
+      </ListGroup.Item>
+    );
+  })}
+</ListGroup>
         </Col>
       </Row>
     </Container>

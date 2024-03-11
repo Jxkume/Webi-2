@@ -8,6 +8,7 @@ type Offer {
   text: String!
   publicationDate: DateTime
   deletionDate: DateTime
+  comments: [Comment]!
 }
 
 type User {
@@ -36,7 +37,6 @@ type Mutation {
 }
 
 input OfferInput {
-  category: ID!
   header: String!
   text: String!
   deletionDate: DateTime
