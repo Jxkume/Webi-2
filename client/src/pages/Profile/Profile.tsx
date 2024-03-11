@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import { observer } from "mobx-react";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Profile.css';
 import { useState } from "react";
 import userStore from "../../Store/UserStore";
 import bcrypt from 'bcryptjs';
+import { getCookie } from "typescript-cookie";
 
 const Profile = observer(() => {
   const [isEditing, setIsEditing] = useState(false);
@@ -12,10 +14,16 @@ const Profile = observer(() => {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState(user.username);
+  const token = getCookie('token');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    init();
-  }, [init]);
+    if (!token) {
+      navigate('/kirjaudu');
+    } else {
+      init();
+    }
+  }, [token, navigate, init]);
 
   const renderProfileEdit = () => (
     <Container>
