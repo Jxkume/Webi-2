@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './NewOfferPage.css'; // Make sure to create a corresponding CSS file
+//import './NewOfferPage.css'; // Make sure to create a corresponding CSS file
 
 const NewOffer: React.FC = () => {
   const [productName, setProductName] = useState('');
