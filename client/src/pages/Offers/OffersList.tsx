@@ -15,6 +15,7 @@ const OffersList = () => {
       const token = getCookie('token');
       setIsLoggedIn(!!token);
 
+      try {
       console.log('Request details:', {
         url: 'http://localhost:3000/graphql',
         method: 'POST',
@@ -32,14 +33,15 @@ const OffersList = () => {
           'Authorization': 'Bearer ${token}'
         },
         body: JSON.stringify({query: `
-        { offers {
-          id
-          header
-          author {
+          { offers {
             id
-            username
-          }
-        }`}),
+            header
+            author {
+              id
+              username
+            }
+          }`
+        }),
       });
 
       if (!response.ok) {
@@ -53,6 +55,9 @@ const OffersList = () => {
         throw new Error('Server response does not include data');
       }
       setOffers(responseData.data.offers);
+    } catch (error) {
+        console.error('Error fetching offers:', error);
+      }
     };
     fetchOffers();
   },[]);

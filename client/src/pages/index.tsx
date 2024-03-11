@@ -10,4 +10,5 @@ export { default as NewReview } from './Reviews/ReviewsNew';
 export { default as ViewReview } from './Reviews/ReviewsView';
 export { default as Profile } from './Profile/Profile';
 export { default as Notifications } from './Notifications/Notifications';
+export { default as AboutUs } from './AboutUs/AboutUs';
 

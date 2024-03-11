@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SearchResults from './components/Header/SearchResults';
-import { Home, Register, Login, ForgottenPassword, Reviews, NewReview, ViewReview, Profile, Notifications, OffersList, Offer, NewOffer} from './pages';
+import { Home, Register, Login, ForgottenPassword, Reviews, NewReview, ViewReview, Profile, Notifications, OffersList, Offer, NewOffer, AboutUs} from './pages';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Route path="/uusiArvostelu" element={<NewReview/>}></Route>
             <Route path="/nakymaArvostelu/:id" element={<ViewReview/>}></Route>
             <Route path="/profiili" element={<Profile/>}></Route>
-            <Route path="/meista"></Route>
+            <Route path="/meista" element={<AboutUs/>}></Route>
             <Route path="/kirjaudu" element={<Login/>}></Route>
             <Route path="/rekisteroidy" element={<Register/>}></Route>
             <Route path="/salasanaPalautus" element={<ForgottenPassword/>}></Route>
