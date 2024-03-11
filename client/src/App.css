@@ -1,0 +1,34 @@
+.content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.App {
+    position: relative;
+    min-height: 100vh;
+}
+
+.Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFD6D6;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.App .btn-custom {
+    background-color: #FFD6D6;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 10px 20px;
+}
