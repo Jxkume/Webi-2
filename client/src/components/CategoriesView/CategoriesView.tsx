@@ -111,41 +111,46 @@ const CategoriesView = () => {
   }
 
   const followButton = (categoryname: string, categoryid: string) => {
+   /*  if (!isLoggedIn) {
+      return (<div></div>);
+    } */
     if (categoriesByUser.find((category: {name: string, _id: string}) => category.name === categoryname)) {
       return (
         <Button onClick={
           async () => {
-            deleteCategoryFromUser(categoryid)
+            deleteCategoryFromUser(categoryid);
           }
         } className='followButton'>Lopeta seuraaminen</Button>
-      )
+      );
     } else {
       return (
         <Button onClick={
           async () => {
-            addCategoryToUser(categoryid)
+            addCategoryToUser(categoryid);
           }
         } className='followButton'>Seuraa</Button>
-      )
+      );
     }
   }
 
-  return (
-    <Container fluid className='categories-background'>
-      <Row className='justify-content-center'>
-        <Col md={3} className='categories-col'>
-          <h2 className='categories-header'>Kategoriat</h2>
-            {
-              categories.map((category: {name: string, _id: string}) => (
-                <div key={category.name} className='category-row'>
-                  {category.name} {followButton(category.name, category._id)}
-                </div>
-              ))
-            }
-        </Col>
-      </Row>
-    </Container>
-  );
+  if (isLoggedIn) {
+    return (
+      <Container fluid className='categories-background'>
+        <Row className='justify-content-center'>
+          <Col md={3} className='categories-col'>
+            <h2 className='categories-header'>Kategoriat</h2>
+              {
+                categories.map((category: {name: string, _id: string}) => (
+                  <div key={category.name} className='category-row'>
+                    {category.name} {followButton(category.name, category._id)}
+                  </div>
+                ))
+              }
+          </Col>
+        </Row>
+      </Container>
+    );
+  } else return (<div></div>);
 }
 
 export default CategoriesView;
