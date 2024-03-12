@@ -16,7 +16,6 @@ const NewReview = () => {
         reviewFile: '',
     });
 
-    //const [categoryName, setCategoryName] = useState('');
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -38,6 +37,8 @@ const NewReview = () => {
     const updateInput: any = (inputAttribute: any) => (event: any) => {
         setInputs({...inputs, [inputAttribute]: event.target.value});
     }
+
+    
 
 
 

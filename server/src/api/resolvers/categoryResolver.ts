@@ -13,7 +13,6 @@ export default {
   },
   User: {
     isFollowing: async (parent: User) => {
-      //Not sure if this is the right way to do it
       return await CategoryModel.find({ _id: { $in: parent.isFollowing } });
     },
   },

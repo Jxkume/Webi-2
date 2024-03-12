@@ -1,132 +1,135 @@
-import { Review, User, Comment, Offer, UserInput, Notification } from "../../types/DBtypes";
+import {
+  Review,
+  User,
+  Comment,
+  Offer,
+  UserInput,
+  Notification,
+} from "../../types/DBtypes";
 import fetchData from "../../functions/fetchData";
 import { UserResponse, LoginResponse } from "../../types/MessageTypes";
 import MyContext from "../../types/MyContext";
-import {isLoggedIn, isAdmin} from "../../functions/authorize";
+import { isLoggedIn, isAdmin } from "../../functions/authorize";
 
 export default {
-  //Remember to add notification
   Notification: {
     receiver: async (parent: Notification) => {
       return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${parent.receiver}`,
+        `${process.env.AUTH_URL}/users/${parent.receiver}`
       );
-    }
+    },
   },
   Review: {
     author: async (parent: Review) => {
       return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${parent.author}`,
+        `${process.env.AUTH_URL}/users/${parent.author}`
       );
     },
   },
   Comment: {
     author: async (parent: Comment) => {
       return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${parent.author}`,
+        `${process.env.AUTH_URL}/users/${parent.author}`
       );
-    }
+    },
   },
   Offer: {
     author: async (parent: Offer) => {
       return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${parent.author}`,
+        `${process.env.AUTH_URL}/users/${parent.author}`
       );
-    }
+    },
   },
   Query: {
     users: async () => {
       return await fetchData<User[]>(`${process.env.AUTH_URL}/users`);
     },
-    userById: async (_parent: undefined, args: {id: string}) => {
-      return await fetchData<User>(
-        `${process.env.AUTH_URL}/users/${args.id}`,
-      );
+    userById: async (_parent: undefined, args: { id: string }) => {
+      return await fetchData<User>(`${process.env.AUTH_URL}/users/${args.id}`);
     },
     //Returns all the users who follow a category. Calls usersByCategory from auth server
-    usersByCategory: async (_parent: undefined, args: {categoryId: string}) => {
+    usersByCategory: async (
+      _parent: undefined,
+      args: { categoryId: string }
+    ) => {
       return await fetchData<User[]>(
-        `${process.env.AUTH_URL}/users/categories/${args.categoryId}`,
+        `${process.env.AUTH_URL}/users/categories/${args.categoryId}`
       );
     },
     checkToken: async (
       _parent: undefined,
       _args: undefined,
-      context: MyContext,
+      context: MyContext
     ) => {
-      return {message: 'User data: ', user: context.userdata?.user};
+      return { message: "User data: ", user: context.userdata?.user };
     },
   },
   Mutation: {
     login: async (
       _parent: undefined,
-      //email works as username
-      args: {credentials: {username: string; password: string}},
+      args: { credentials: { username: string; password: string } }
     ) => {
       return await fetchData<LoginResponse>(
         `${process.env.AUTH_URL}/auth/login`,
         {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(args.credentials),
-        },
+        }
       );
     },
-    register: async (
-      _parent: undefined,
-      args: {user: UserInput},
-    ) => {
+    register: async (_parent: undefined, args: { user: UserInput }) => {
       return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(args.user),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(args.user),
       });
     },
     addCategoryToUser: async (
       _parent: undefined,
-      args: {categoryId: string},
-      context: MyContext,
+      args: { categoryId: string },
+      context: MyContext
     ) => {
       isLoggedIn(context);
       return await fetchData<Partial<User>>(
         `${process.env.AUTH_URL}/users/${context.userdata?.user.id}/categories`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${context.userdata?.token}`,
           },
-          body: JSON.stringify({categoryId: args.categoryId}),
-        },
+          body: JSON.stringify({ categoryId: args.categoryId }),
+        }
       );
     },
     removeCategoryFromUser: async (
       _parent: undefined,
-      args: {categoryId: string},
-      context: MyContext,
+      args: { categoryId: string },
+      context: MyContext
     ) => {
       return await fetchData<Partial<User>>(
         `${process.env.AUTH_URL}/users/${context.userdata?.user.id}/categories`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${context.userdata?.token}`,
           },
-          body: JSON.stringify({categoryId: args.categoryId}),
+          body: JSON.stringify({ categoryId: args.categoryId }),
         }
       );
     },
     updateUser: async (
       _parent: undefined,
-      args: {user: Partial<UserInput>},
-      context: MyContext,
+      args: { user: Partial<UserInput> },
+      context: MyContext
     ) => {
       isLoggedIn(context);
       return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${context.userdata?.token}`,
         },
         body: JSON.stringify(args.user),
@@ -135,53 +138,53 @@ export default {
     deleteUser: async (
       _parent: undefined,
       _args: undefined,
-      context: MyContext,
+      context: MyContext
     ) => {
       isLoggedIn(context);
       return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${context.userdata?.token}`,
         },
       });
     },
     updateUserAsAdmin: async (
       _parent: undefined,
-      args: {user: Partial<UserInput>, id: string},
-      context: MyContext,
+      args: { user: Partial<UserInput>; id: string },
+      context: MyContext
     ) => {
       isLoggedIn(context);
       isAdmin(context);
       return await fetchData<UserResponse>(
         `${process.env.AUTH_URL}/users/${args.id}`,
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${context.userdata?.token}`,
           },
           body: JSON.stringify(args.user),
-        },
+        }
       );
     },
     deleteUserAsAdmin: async (
       _parent: undefined,
-      args: {id: string},
-      context: MyContext,
+      args: { id: string },
+      context: MyContext
     ) => {
       isLoggedIn(context);
       isAdmin(context);
       return await fetchData<UserResponse>(
         `${process.env.AUTH_URL}/users/${args.id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${context.userdata?.token}`,
           },
-        },
+        }
       );
     },
-  }
-}
+  },
+};
