@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import useHistory from 'react-router-dom';
 import './Register.css';
 
 const RegisterPage = () => {
@@ -21,9 +20,13 @@ const RegisterPage = () => {
   }
 
   const createAccount = async (event: any) => {
+    if (inputs.password.length < 8) {
+      alert('Salasanan minimipituus on 8 merkkiä');
+      return;
+    }
     event.preventDefault();
-      const mutation = 
-    `	
+      const mutation =
+    `
       mutation {
         register(user: {
           password: "${inputs.password}"
@@ -59,39 +62,39 @@ const RegisterPage = () => {
       <Container fluid className="register-background">
         <Row className="justify-content-center">
           <Col md={6} className="register-form-col">
-            <Form 
+            <Form
             className="register-form"
             onSubmit={createAccount}
             >
               <h2>Rekisteröidy</h2>
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Käyttäjänimi</Form.Label>
-                <Form.Control 
-                type="text" 
-                placeholder="Käyttäjänimi" 
+                <Form.Control
+                type="text"
+                placeholder="Käyttäjänimi"
                 onChange={updateInput("username")}/>
               </Form.Group>
-        
+
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Sähköposti</Form.Label>
-                <Form.Control 
-                type="email" 
+                <Form.Control
+                type="email"
                 placeholder="Sähköposti"
                 onChange={updateInput("email")} />
               </Form.Group>
-        
+
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Salasana</Form.Label>
-                <Form.Control 
-                type="password" 
+                <Form.Control
+                type="password"
                 placeholder="Salasana"
                 onChange={updateInput("password")} />
               </Form.Group>
-        
+
               <Button variant="primary" type="submit">
                 Rekisteröidy
               </Button>
-        
+
               <div className="login-link">
                 Löytyykö sinulta jo tili? <br/><Link to="/kirjaudu">Kirjaudu sisään</Link>
               </div>
@@ -103,4 +106,4 @@ const RegisterPage = () => {
 };
 
 
-export default RegisterPage; 
+export default RegisterPage;
