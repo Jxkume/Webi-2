@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import './CategoriesView.css';
-import { Container, Row, Col, Button, Form} from 'react-bootstrap';
+import { Container, Row, Col, Button} from 'react-bootstrap';
 import { getCookie } from 'typescript-cookie';
 import { getUserId } from '../../Functions/GetUserFromToken';
 
@@ -9,7 +9,6 @@ const CategoriesView = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [categoriesByUser, setCategoriesByUser] = useState([]);
   const token = getCookie('token');
-  //const [userId, setUserId] = useState('');
 
   const fetchCategories = useCallback(async () => {
     const categoriesQuery = `
@@ -30,7 +29,6 @@ const CategoriesView = () => {
     });
 
     const response = await request.json();
-    console.log(response);
     setCategories(response.data.categories);
   }, [token])
 
@@ -53,7 +51,6 @@ const CategoriesView = () => {
       body: JSON.stringify({ query: categoriesByUserQuery }),
     });
     const response = await request.json();
-    console.log(response);
     setCategoriesByUser(response.data.categoriesByUser);
   }, [token])
 
@@ -65,7 +62,6 @@ const CategoriesView = () => {
       setIsLoggedIn(false);
     }
     fetchCategories();
-    //console.log(categories);
   }, [token, fetchCategories, fetchCategoriesByUser]);
 
   const addCategoryToUser = async (categoryId: string) => {
@@ -84,8 +80,7 @@ const CategoriesView = () => {
       },
       body: JSON.stringify({ query: addCategoryMutation }),
     });
-    const response = await request.json();
-    console.log(response);
+    await request.json();
     fetchCategoriesByUser();
   }
 
@@ -105,15 +100,11 @@ const CategoriesView = () => {
       },
       body: JSON.stringify({ query: deleteCategoryMutation }),
     });
-    const response = await request.json();
-    console.log(response);
+    await request.json();
     fetchCategoriesByUser();
   }
 
   const followButton = (categoryname: string, categoryid: string) => {
-   /*  if (!isLoggedIn) {
-      return (<div></div>);
-    } */
     if (categoriesByUser.find((category: {name: string, _id: string}) => category.name === categoryname)) {
       return (
         <Button onClick={

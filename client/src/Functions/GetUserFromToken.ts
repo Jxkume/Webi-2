@@ -1,9 +1,8 @@
-import { User, UserInput } from "../Types/User";
+import { User } from "../Types/User";
 import { getCookie } from "typescript-cookie";
 
 const checkToken = async () => {
   const token = getCookie('token');
-    console.log("TOKEN: ", token);
     const checkTokenQuery = `
     query {checkToken {
       message
@@ -23,9 +22,7 @@ const checkToken = async () => {
       body: JSON.stringify({ query: checkTokenQuery }),
     });
     const response = await request.json();
-    console.log(response);
     const user = response.data.checkToken.user as User;
-    console.log(user);
     return user;
 }
 

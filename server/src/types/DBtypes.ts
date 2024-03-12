@@ -60,6 +60,7 @@ type Notification = Partial<Document> & {
   text: string;
   publicationDate: Date;
   expire: Date;
+  link: string;
 };
 
 export {

@@ -22,6 +22,10 @@ const notificationModel = new mongoose.Schema<Notification>({
     type: Date,
     required: true,
   },
+
+  link: {
+    type: String
+  }
 });
 
 export default mongoose.model<Notification>('Notification', notificationModel);

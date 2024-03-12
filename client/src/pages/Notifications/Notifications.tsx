@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Notifications.css';
 import checkToken from '../../Functions/GetUserFromToken';
 import { getCookie } from 'typescript-cookie';
+import { Link } from 'react-router-dom';
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState([]);
@@ -23,8 +24,7 @@ const NotificationsPage = () => {
       body: JSON.stringify({ query: deleteMutation }),
     });
 
-    const response = await request.json();
-    console.log(response);
+    await request.json();
   }
 
   const fetchNotifications = useCallback(async () => {
@@ -45,14 +45,12 @@ const NotificationsPage = () => {
     });
 
     const response = await request.json();
-    //console.log(response);
     setNotifications(response.data.notificationsByReceiver);
-  }, []);
+  }, [token]);
 
 
   useEffect(() => {
     fetchNotifications();
-    //console.log(notifications);
   }, [fetchNotifications]);
 
   return (
@@ -60,9 +58,9 @@ const NotificationsPage = () => {
       <Row className="justify-content-center">
         <Col md={6} className="notifications-col">
           <h1 className='header-title'>Ilmoitukset</h1>
-          {notifications.map((notification: {id: string, text: string, publicationDate: string}) => (
+          {[...notifications].reverse().map((notification: {id: string, text: string, publicationDate: string, link: string}) => (
             <div key={notification.id} className="notification">
-              <p>{notification.text}</p>
+              <p><Link to={notification.link}>{notification.text}</Link></p>
               <p className='notificationDate'>{notification.publicationDate}</p>
               <Button onClick={async() =>{
                 await removeNotification(notification.id);

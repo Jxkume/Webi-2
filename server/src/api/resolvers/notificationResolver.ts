@@ -53,7 +53,7 @@ export default {
     },
     sendNotificationToManyUsers: async (
       _parent: undefined,
-      args: { userIds: string[]; text: string }
+      args: { userIds: string[]; text: string, link: string }
     ) => {
       const publicationDate = new Date();
       const expire = new Date();
@@ -64,6 +64,7 @@ export default {
           text: args.text,
           publicationDate: publicationDate,
           expire: expire,
+          link: args.link,
         };
       });
       return await notificationModel.insertMany(notifications);

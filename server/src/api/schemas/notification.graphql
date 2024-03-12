@@ -6,6 +6,7 @@ type Notification {
   text: String!
   publicationDate: DateTime!
   expire: DateTime!
+  link: String
 }
 
 input InputNotification {
@@ -27,6 +28,7 @@ type Mutation {
   sendNotificationToManyUsers(
     userIds: [String!]!
     text: String!
+    link: String
   ): [Notification]
   addNotification(input: InputNotification!): Notification
   deleteNotification(id: ID!): Notification

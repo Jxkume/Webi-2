@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
-import { User, UserInput } from "../Types/User";
+import { User, UserInput } from "../../Types/User";
 import { getCookie } from "typescript-cookie";
-import logout from "../Functions/Logout";
-import checkToken from "../Functions/GetUserFromToken";
+import logout from "../../Functions/Logout";
+import checkToken from "../../Functions/GetUserFromToken";
 
-class UserStore {
+class UserActions {
   user: User = {
     id: '',
     email: '',
@@ -49,8 +49,6 @@ class UserStore {
 
   updateUser = async (user: UserInput) => {
     const token = getCookie('token');
-    //const salt = bcrypt.genSaltSync(10);
-    //user.password = await bcrypt.hash(user.password, salt);
     const updateUserMutation = `
     mutation {updateUser(user: {username: "${user.username}", email: "${user.email}", password: "${user.password}"}){
       message
@@ -68,11 +66,9 @@ class UserStore {
       body: JSON.stringify({ query: updateUserMutation }),
     });
     const response = await request.json();
-    console.log(response);
     this.user = response.data.updateUser.user;
-    console.log(this.user);
   }
 }
 
-const userStore = new UserStore();
-export default userStore;
+const userActions = new UserActions();
+export default userActions;

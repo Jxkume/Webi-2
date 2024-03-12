@@ -30,7 +30,6 @@ const Login: React.FC = () => {
         body: JSON.stringify({ query: loginMutation }),
       });
       const response = await request.json();
-      console.log(response);
 
       if (response.errors !== undefined) {
         alert('Väärä sähköposti tai salasana!');

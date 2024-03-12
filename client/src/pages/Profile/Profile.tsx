@@ -4,13 +4,13 @@ import { observer } from "mobx-react";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Profile.css';
 import { useState } from "react";
-import userStore from "../../Store/UserStore";
+import userActions from "./UserActions";
 import bcrypt from 'bcryptjs';
 import { getCookie } from "typescript-cookie";
 
 const Profile = observer(() => {
   const [isEditing, setIsEditing] = useState(false);
-  let {init, user, updateUser, deleteUser} = userStore;
+  let {init, user, updateUser, deleteUser} = userActions;
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState(user.username);
@@ -91,7 +91,6 @@ const Profile = observer(() => {
                   className="profileButton"
                   onClick={async () => {
                     const encryptedPassword = await bcrypt.hash(password, 10);
-                    console.log(username, email, encryptedPassword);
                     await updateUser({username: username, email: email, password: encryptedPassword});
                     setIsEditing(false);
                   }}>

@@ -91,7 +91,7 @@ const NewReview = () => {
         body: JSON.stringify({ query: mutation, variables }),
      });
         const responseData = await response.json();
-        console.log(responseData);
+        //console.log(responseData);
 
         if (responseData.errors !== undefined) {
             setReviewCreatedResponse(responseData.errors[0].message);
@@ -118,11 +118,16 @@ const NewReview = () => {
       body: JSON.stringify({ query: getUsersQuery }),
     });
     const getUsersResponse = await getUsersRequest.json();
-    console.log(getUsersResponse);
+    //console.log(getUsersResponse);
     userIds = getUsersResponse.data.usersByCategory.map((user: {id: string}) => user.id);
 
     const sendNotificationsMutation = `
-      mutation {sendNotificationToManyUsers(userIds: "${userIds}", text: "Uusi arvostelu kategoriassa ${categoryName}!") {
+      mutation
+      {sendNotificationToManyUsers(
+        userIds: [${userIds.map((id: String) => `"${id}"`)}],
+        text: "Uusi arvostelu kategoriassa ${categoryName}!",
+        link: "/arvostelut"
+      ) {
         id
       }}
     `;

@@ -43,7 +43,7 @@ const ReviewsPage = () => {
                             Lisää uusi arvostelu!
                         </Button>
                     )}
-                    {reviews.map((review: { id: string, header: string, text: string, rating: number, author: { username: string } }) => (
+                    {[...reviews].reverse().map((review: { id: string, header: string, text: string, rating: number, author: { username: string } }) => (
                         <div key={review.id} className="review-box">
                             <h2>{review.header}</h2>
                             <p>Kuvaus: {review.text}</p>
