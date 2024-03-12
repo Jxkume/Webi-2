@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getCookie } from 'typescript-cookie';
+import CategoriesView from '../../components/CategoriesView/CategoriesView';
 import './Reviews.css';
 import { set } from 'mobx';
 
@@ -15,10 +16,10 @@ const ReviewsPage = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             const token = getCookie('token');
-            setIsLoggedIn(!!token); 
+            setIsLoggedIn(!!token);
             const response = await fetch('http://localhost:3000/graphql', {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ${token}'
                 },
@@ -29,9 +30,10 @@ const ReviewsPage = () => {
         };
         fetchReviews();
     }, []);
-    
+
 
     return (
+      <div>
         <Container fluid className="reviews-background">
             <Row className="justify-content-center">
                 <Col md={6} className="reviews-col">
@@ -51,13 +53,17 @@ const ReviewsPage = () => {
                                 <Button variant="primary">Katso arvostelu</Button>
                             </Link>
                         </div>
-                        
+
                     ))}
                 </Col>
+              <Col md={2} className="categories-col">
+                <CategoriesView />
+              </Col>
             </Row>
         </Container>
+      </div>
     );
 };
 
 
-export default ReviewsPage; 
+export default ReviewsPage;

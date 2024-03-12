@@ -1,0 +1,39 @@
+.followButton {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFD6D6;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Add this line */
+}
+
+.followButton:hover {
+  background-color: #FFA5A5;
+  color: #000;
+}
+
+.category-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.category-row:last-child{
+  border-bottom: none;
+}
+
+.categories-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.categories-background {
+  padding-top: 20px;
+}
