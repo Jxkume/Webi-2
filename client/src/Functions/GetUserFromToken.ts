@@ -11,6 +11,9 @@ const checkToken = async () => {
         username
         email
         id
+        isFollowing {
+          name
+        }
       }
     }}`;
 
@@ -26,4 +29,10 @@ const checkToken = async () => {
     return user;
 }
 
+const getUserId = async () => {
+  const user = await checkToken();
+  return user.id;
+}
+
 export default checkToken;
+export { getUserId };
