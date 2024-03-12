@@ -91,7 +91,6 @@ const NewReview = () => {
         body: JSON.stringify({ query: mutation, variables }),
      });
         const responseData = await response.json();
-        //console.log(responseData);
 
         if (responseData.errors !== undefined) {
             setReviewCreatedResponse(responseData.errors[0].message);

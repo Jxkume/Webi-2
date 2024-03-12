@@ -36,6 +36,7 @@ const NotificationsPage = () => {
         id
         publicationDate
         text
+        link
       }}
     `;
     const request = await fetch('http://localhost:3000/graphql', {
@@ -60,7 +61,7 @@ const NotificationsPage = () => {
           <h1 className='header-title'>Ilmoitukset</h1>
           {[...notifications].reverse().map((notification: {id: string, text: string, publicationDate: string, link: string}) => (
             <div key={notification.id} className="notification">
-              <p><Link to={notification.link}>{notification.text}</Link></p>
+              <p><Link to={`${notification.link}`}>{notification.text}</Link></p>
               <p className='notificationDate'>{notification.publicationDate}</p>
               <Button onClick={async() =>{
                 await removeNotification(notification.id);

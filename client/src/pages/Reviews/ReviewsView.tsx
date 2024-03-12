@@ -101,7 +101,11 @@ const ReviewView = () => {
     const sendNotification = async () => {
       const authorId = (author as unknown as User).id;
       const notificationMutation = `
-        mutation {addNotification(input: {receiver: "${authorId}", text: "Uusi kommentti arvosteluusi"}){
+        mutation {addNotification(input: {
+          receiver: "${authorId}",
+          text: "Uusi kommentti arvosteluusi",
+          link: "/nakymaArvostelu/${id}"}
+          ){
           id
         }}
       `;
@@ -112,8 +116,7 @@ const ReviewView = () => {
         },
         body: JSON.stringify({ query: notificationMutation }),
       });
-      const response = await request.json();
-      console.log(response);
+      await request.json();
     };
 
     if (!review) {

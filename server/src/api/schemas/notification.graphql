@@ -12,6 +12,7 @@ type Notification {
 input InputNotification {
   receiver: ID!
   text: String!
+  link: String
 }
 
 input InputNotificationArray {
