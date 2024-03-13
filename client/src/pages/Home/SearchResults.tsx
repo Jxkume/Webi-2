@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import './SearchResults.css';
+import {Card, Col, Container, Row} from "react-bootstrap";
 
 const SEARCH_REVIEWS = gql`
   query SearchReviews($searchTerm: String!) {
@@ -30,15 +31,6 @@ const SEARCH_CATEGORIES = gql`
   }
 `;
 
-const SEARCH_NOTIFICATIONS = gql`
-  query SearchNotifications($searchTerm: String!) {
-    searchNotifications(searchTerm: $searchTerm) {
-      id
-      text
-    }
-  }
-`;
-
 const SearchResults = () => {
   const { searchTerm } = useParams();
 
@@ -54,53 +46,64 @@ const SearchResults = () => {
     variables: { searchTerm },
   });
 
-  const { loading: loadingNotifications, error: errorNotifications, data: dataNotifications } = useQuery(SEARCH_NOTIFICATIONS, {
-    variables: { searchTerm },
-  });
 
-  if (loadingReviews || loadingOffers || loadingCategories || loadingNotifications) return <p>Loading...</p>;
-  if (errorReviews || errorOffers || errorCategories || errorNotifications) return <p>Error :</p>;
+
+  if (loadingReviews || loadingOffers || loadingCategories ) return <p>Loading...</p>;
+  if (errorReviews || errorOffers || errorCategories ) return <p>Error :</p>;
 
   return (
-    <div className="search-results">
-      <div className="search-sectionA">
-        <h2>Arvostelut</h2>
-        {dataReviews.searchReviews.map((review: any) => (
-          <Link to={`/nakymaArvostelu/${review.id}`} key={review.id}>
-            <div className="search-item">
-              <h3>{review.header}</h3>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <Container className="search-results">
+        <Row className={"justify-content-center"}>
+          <Col md={8}>
+            <h3>Hakutulokset</h3>
+            <hr/>
 
-      <div className="search-sectionT">
-    <h2>Tarjoukset</h2>
-    {dataOffers.searchOffers.map((offer: any) => (
-      <div className="search-item" key={offer.id}>
-        <h3>{offer.header}</h3>
-      </div>
-    ))}
-  </div>
+            <Card className="mb-4">
+              <Card.Header>
+                <h5>Arvostelut</h5>
+              </Card.Header>
+              <Card.Body>
+                {dataReviews.searchReviews.map((review: any) => (
+                    <Link to={`/nakymaArvostelu/${review.id}`} key={review.id} className="text-decoration-none">
+                      <Card className="mb-2">
+                        <Card.Body>{review.header}</Card.Body>
+                      </Card>
+                    </Link>
+                ))}
+              </Card.Body>
+            </Card>
 
-  <div className="search-sectionK">
-    <h2>Kategoriat</h2>
-    {dataCategories.searchCategories.map((category: any) => (
-      <div className="search-item" key={category.id}>
-        <h3>{category.name}</h3>
-      </div>
-    ))}
-  </div>
+            <Card className="mb-4">
+              <Card.Header>
+                <h5>Tarjoukset</h5>
+              </Card.Header>
+              <Card.Body>
+                {dataOffers.searchOffers.map((offer: any) => (
+                    <Link to={`/tarjous/${offer.id}`} key={offer.id} className="text-decoration-none">
+                      <Card className="mb-2">
+                        <Card.Body>{offer.header}</Card.Body>
+                      </Card>
+                    </Link>
+                ))}
+              </Card.Body>
+            </Card>
 
-  <div className="search-sectionN">
-    <h2>Ilmoitukset</h2>
-    {dataNotifications.searchNotifications.map((notifications: any) => (
-      <div className="search-item" key={notifications.id}>
-        <h3>{notifications.text}</h3>
-      </div>
-    ))}
-  </div>
-</div>
+            <Card>
+              <Card.Header>
+                <h5>Kategoriat</h5>
+              </Card.Header>
+              <Card.Body>
+                {dataCategories.searchCategories.map((category: any) => (
+                    <Card className="mb-2" key={category.id}>
+                      <Card.Body>{category.name}</Card.Body>
+                    </Card>
+                ))}
+              </Card.Body>
+            </Card>
+
+          </Col>
+        </Row>
+      </Container>
   );
 };
 

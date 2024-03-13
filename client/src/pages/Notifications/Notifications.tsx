@@ -62,7 +62,7 @@ const NotificationsPage = () => {
           <hr />
           {[...notifications].reverse().map((notification: {id: string, text: string, publicationDate: string, link: string}) => (
             <div key={notification.id} className="notification">
-              <p><Link to={`${notification.link}`}>{notification.text}</Link></p>
+              <p><Link className={"notif-link"} to={`${notification.link}`}>{notification.text}</Link></p>
               <p className='notificationDate'>{notification.publicationDate}</p>
               <Button onClick={async() =>{
                 await removeNotification(notification.id);

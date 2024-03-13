@@ -15,14 +15,13 @@
   bottom: 0;
   background: rgba(255, 255, 255, 0.4);
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .register-form-col {
   background-color: white;
   padding: 50px;
   border-radius: 15px;
+  margin-top: 100px;
 }
 
 .register-form {
@@ -31,6 +30,7 @@
 
 .login-link {
   margin-top: 20px;
+  color: black;
 }
 
 .btn-custom {

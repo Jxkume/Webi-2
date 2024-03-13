@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCookie } from 'typescript-cookie';
-import { Container, Row, Col, Button, Form} from 'react-bootstrap';
+import {Container, Row, Col, Button, Form, Card, CardTitle, ListGroup} from 'react-bootstrap';
 import './ReviewsView.css';
 import { User } from '../../Types/User';
 
@@ -124,37 +124,52 @@ const ReviewView = () => {
     }
 
     return (
-        <Container  className="reviewsnew-background">
-            <Row className="justify-content-center">
-                <Col md={6} className="review-detail-container">
-                    <h1>{(review as { header: string }).header}</h1>
-                    <p>Kuvaus: {(review as { text: string }).text}</p>
-                    <p>Arvosana: {(review as { rating: number }).rating}</p>
-                    <p>Tekijä: {(review as { author: { username: string } }).author.username}</p>
-                    <p>Kuva: {(review as { filename: string }).filename.endsWith('.png') ? (review as { filename: string }).filename : 'None'}</p>
-                    <p>Julkaisupäivämäärä: {(review as { publicationDate: string }).publicationDate}</p>
+        <Container  className="container-review">
+            <Row className="justify-content-center my-4">
+                <Col>
+                    <h2>Arvostelu</h2>
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>{(review as { header: string }).header}</Card.Title>
+                            <Card.Text>
+                                <p><b>Kuvaus:</b> {(review as { text: string }).text}</p>
+                                <p><b>Arvosana:</b> {(review as { rating: number }).rating}</p>
+                                <p><b>Tekijä:</b> {(review as { author: { username: string } }).author.username}</p>
+                                <p><b>Kuva:</b> {(review as { filename: string }).filename.endsWith('.png') ? (review as {
+                                    filename: string
+                                }).filename : 'None'}</p>
+                                <p><b>Julkaisupäivämäärä:</b> {(review as { publicationDate: string }).publicationDate}</p>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h3>Kommentit</h3>
                     {isLoggedIn && (
-                        <Button className=" btn-custom mt-3" onClick={handleCommentButtonClick}>Uusi kommentti</Button>
+                        <Button className=" btn-custom" onClick={handleCommentButtonClick}>Kommentoi</Button>
                     )}
                     {showCommentForm && (
                         <Form onSubmit={handleCommentSubmit}>
                             <Form.Group controlId="comment">
-                                <Form.Label>Kommentti</Form.Label>
-                                <Form.Control className="kommenttikent" as="textarea" rows={3} value={commentText} onChange={handleCommentChange} />
+                                <Form.Label>Kommentti:</Form.Label>
+                                <Form.Control className="kommenttikent" as="textarea" rows={3} value={commentText}
+                                              onChange={handleCommentChange}/>
                             </Form.Group>
                             <Button className={"btn-custom"} type="submit">
                                 Lähetä
                             </Button>
                         </Form>
                     )}
-                    <h1 className="mt-5">Kommentit</h1>
-                    {comments.map((comment: { id: string, text: string, author: { username: string } }) => (
-                        <div key={comment.id} className='comment'>
-                            <p><strong> {comment.author.username}</strong></p>
-                            <hr />
-                            <p>{comment.text}</p>
-                        </div>
-                    ))}
+                    <ListGroup className={"reviewbackground"}>
+                        {comments.map((comment: { id: string, text: string, author: { username: string } }) => (
+                            <ListGroup.Item>
+                                <strong> {comment.author.username}</strong>
+                                <p>{comment.text}</p>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
                 </Col>
             </Row>
         </Container>

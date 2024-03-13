@@ -72,56 +72,55 @@ const NewOffer: React.FC = () => {
 
 
   return (
-    <Container className={"offernew"}>
-      <Row className="justify-content-center">
-        <Col md={8}>
-          <Form onSubmit={createOffer}>
-            <Form.Group className="mb-3" controlId="productName">
-              <Form.Label>Tuotteen nimi:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={"Tuotteen nimi:"}
-                value={input.productName}
-                onChange={(e) => setInput({...input, productName: e.target.value})}
-              />
-            </Form.Group>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="store">
-                  <Form.Label>Kauppa:</Form.Label>
-                  <Form.Control
+      <Container className={"offernew"}>
+        <Row className="justify-content-center">
+          <Col md={8}>
+            <Form onSubmit={createOffer}>
+              <Form.Group className="mb-3" controlId="productName">
+                <Form.Label>Tuotteen nimi:</Form.Label>
+                <Form.Control
                     type="text"
-                    placeholder="Kaupan nimi"
-                    value={input.store}
-                    onChange={(e) => setInput({...input, store: e.target.value})}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="deletionDate">
-                  <Form.Label>Tarjouksen päättymispäivä:</Form.Label>
-                  <DatePicker
-                    selected={input.deletionDate}
-                    onChange={(date: Date) => setInput({...input, deletionDate: date})}
-                    dateFormat="dd.MM.yyyy"
-                    minDate={new Date()}
-                    placeholderText="Valitse päivä"
-                    className="form-control"
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+                    placeholder={"Tuotteen nimi:"}
+                    value={input.productName}
+                    onChange={(e) => setInput({...input, productName: e.target.value})}
+                />
+              </Form.Group>
 
-            <Button className={"btn-custom"} type="submit">
-              Lähetä ilmoitus
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="store">
+                    <Form.Label>Kauppa:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Kaupan nimi"
+                        value={input.store}
+                        onChange={(e) => setInput({...input, store: e.target.value})}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="deletionDate">
+                    <Form.Label>Tarjouksen päättymispäivä:</Form.Label>
+                    <DatePicker
+                        selected={input.deletionDate}
+                        onChange={(date: Date) => setInput({...input, deletionDate: date})}
+                        dateFormat="dd.MM.yyyy"
+                        minDate={new Date()}
+                        placeholderText="Valitse päivä"
+                        className="form-control"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Button className={"btn-custom"} type="submit">
+                Lähetä ilmoitus
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
   );
 };
 
 export default NewOffer;
-

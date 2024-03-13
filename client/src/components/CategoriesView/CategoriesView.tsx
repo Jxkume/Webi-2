@@ -126,9 +126,9 @@ const CategoriesView = () => {
 
   if (isLoggedIn) {
     return (
-      <Container fluid className='categories-background'>
-        <Row className='justify-content-center'>
-          <Col md={3} className='categories-col'>
+      <Container fluid>
+        <Row>
+          <Col xs={12} md={4}>
             <h2 className='categories-header'>Kategoriat</h2>
             <hr />
               {
