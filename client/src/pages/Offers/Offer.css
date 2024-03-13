@@ -1,8 +1,10 @@
-.Container {
-    background: #fff;
+.container-offer {
+  background: #fff;
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
 
-h2, h3 {
+offer.h2, offer.h3 {
     color: #333;
   }
 
@@ -31,9 +33,4 @@ h2, h3 {
 
 .btn-custom:hover {
   background-color: #FFA5A5;
-}
-
-.offer {
-  margin-bottom: 50px;
-  margin-top: 20px;
 }

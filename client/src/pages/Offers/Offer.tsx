@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import {Container, Row, Col, Card, ListGroup, Form} from 'react-bootstrap';
 import './Offer.css';
 import { User } from '../../Types/User';
 import {useParams} from "react-router-dom";
@@ -123,7 +123,7 @@ const Offer: React.FC = () => {
     <Container className={"offer"}>
       <Row className="my-4">
         <Col>
-          <h2>Tarjous</h2>
+          <h2 >Tarjous</h2>
           <Card>
             <Card.Body>
               <Card.Title>{offer && (offer as { header: string }).header}</Card.Title>
@@ -140,13 +140,12 @@ const Offer: React.FC = () => {
               <button className={"btn-custom"} onClick={handleCommentButtonClick}>Kommentoi</button>
           )}
           {showCommentForm && (
-              <form onSubmit={handleCommentSubmit}>
-                    <textarea
-                        value={commentText}
-                        onChange={handleCommentChange}
-                    /><br/>
-                <button className={"btn-custom"} type="submit">Lähetä kommentti</button>
-              </form>
+              <Form onSubmit={handleCommentSubmit}>
+                <Form.Label>Kommentti:</Form.Label>
+                    <Form.Control as="textarea" rows={3} value={commentText} onChange={handleCommentChange} />
+
+                <button className={"btn-custom"} type="submit">Lähetä</button>
+              </Form>
           )}
             <ListGroup>
                 {comments.length > 0 ? (
