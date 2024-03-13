@@ -6,7 +6,7 @@ const fetchData = async <T>(
   options: RequestInit = {}
 ): Promise<T> => {
   const response = await fetch(url, options);
-  const json = (await response.json()) as T; // Type assertion here
+  const json = (await response.json()) as T;
   if (!response.ok) {
     const errorJson = json as unknown as ErrorResponse;
     console.log(

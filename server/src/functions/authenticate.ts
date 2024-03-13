@@ -20,7 +20,6 @@ export default async (req: Request): Promise<MyContext> => {
         user: userFromToken,
       };
 
-      // console.log('user from token', userdata);
       return { userdata: tokenContent };
     } catch (error) {
       return {};

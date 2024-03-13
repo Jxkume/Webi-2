@@ -10,7 +10,6 @@ const reviewSchema = new mongoose.Schema<Review>({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
-    required: true,
   },
   header: {
     type: String,
@@ -22,7 +21,6 @@ const reviewSchema = new mongoose.Schema<Review>({
   },
   filename: {
     type: String,
-    //required: true,
   },
   publicationDate: {
     type: Date,

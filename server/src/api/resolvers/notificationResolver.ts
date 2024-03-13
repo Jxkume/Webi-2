@@ -48,7 +48,6 @@ export default {
       args.input.publicationDate = new Date();
       args.input.expire = new Date();
       args.input.expire.setDate(args.input.expire.getDate() + 14);
-      console.log(args.input);
       return await notificationModel.create(args.input);
     },
     sendNotificationToManyUsers: async (
