@@ -30,15 +30,6 @@ const SEARCH_CATEGORIES = gql`
   }
 `;
 
-const SEARCH_NOTIFICATIONS = gql`
-  query SearchNotifications($searchTerm: String!) {
-    searchNotifications(searchTerm: $searchTerm) {
-      id
-      text
-    }
-  }
-`;
-
 const SearchResults = () => {
   const { searchTerm } = useParams();
 
@@ -54,12 +45,10 @@ const SearchResults = () => {
     variables: { searchTerm },
   });
 
-  const { loading: loadingNotifications, error: errorNotifications, data: dataNotifications } = useQuery(SEARCH_NOTIFICATIONS, {
-    variables: { searchTerm },
-  });
 
-  if (loadingReviews || loadingOffers || loadingCategories || loadingNotifications) return <p>Loading...</p>;
-  if (errorReviews || errorOffers || errorCategories || errorNotifications) return <p>Error :</p>;
+
+  if (loadingReviews || loadingOffers || loadingCategories ) return <p>Loading...</p>;
+  if (errorReviews || errorOffers || errorCategories ) return <p>Error :</p>;
 
   return (
     <div className="search-results">
@@ -77,29 +66,22 @@ const SearchResults = () => {
       <div className="search-sectionT">
     <h2>Tarjoukset</h2>
     {dataOffers.searchOffers.map((offer: any) => (
-      <div className="search-item" key={offer.id}>
-        <h3>{offer.header}</h3>
-      </div>
-    ))}
-  </div>
+      <Link to={`/tarjous/${offer.id}`} key={offer.id}>
+        <div className="search-item" key={offer.id}>
+          <h3>{offer.header}</h3>
+        </div>
+      </Link>
+      ))}
+    </div>
 
-  <div className="search-sectionK">
-    <h2>Kategoriat</h2>
-    {dataCategories.searchCategories.map((category: any) => (
-      <div className="search-item" key={category.id}>
-        <h3>{category.name}</h3>
-      </div>
-    ))}
-  </div>
-
-  <div className="search-sectionN">
-    <h2>Ilmoitukset</h2>
-    {dataNotifications.searchNotifications.map((notifications: any) => (
-      <div className="search-item" key={notifications.id}>
-        <h3>{notifications.text}</h3>
-      </div>
-    ))}
-  </div>
+    <div className="search-sectionK">
+      <h2>Kategoriat</h2>
+      {dataCategories.searchCategories.map((category: any) => (
+        <div className="search-item" key={category.id}>
+          <h3>{category.name}</h3>
+        </div>
+      ))}
+    </div>
 </div>
   );
 };
