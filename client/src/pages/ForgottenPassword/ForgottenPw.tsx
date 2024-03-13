@@ -12,32 +12,34 @@ const ForgottenPassword = () => {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col md={6} className="password-reset-form-wrapper">
-          <h2>Unohdettu salasana</h2>
-          <hr />
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="passwordResetEmail">
-              <Form.Label>Sähköposti</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Sähköposti"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
+  <div className="fp-background">
+    <div className="fp-overlay">
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={4} className="fp-form-col">
+            <h2>Unohdettu salasana</h2>
+            <hr />
+            <Form className={"pw-form"} onSubmit={handleSubmit}>
+              <Form.Group controlId="passwordResetEmail">
+                <Form.Label>Sähköposti</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="Sähköposti"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+              </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Lähetä linkki
-            </Button>
-          </Form>
-        </Col>
-        <Col md={6} className="password-reset-image-wrapper">
-        </Col>
-      </Row>
-    </Container>
+              <Button className={"btn-custom"} type="submit">
+                Lähetä linkki
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  </div>
   );
 };
 

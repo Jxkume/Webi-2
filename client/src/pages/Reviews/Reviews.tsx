@@ -33,17 +33,11 @@ const ReviewsPage = () => {
 
 
     return (
-      <div>
-        <Container fluid className="reviews-background">
-            <Row className="justify-content-center">
-                <Col md={6} className="reviews-col">
+        <Container className="reviews-background">
+            <Row className="justify-content-center my-4">
+                <Col xs={12} md={8}>
                     <h2 className='header-title'>Arvostelut</h2>
                     <hr />
-                    {isLoggedIn && (
-                        <Button className="newreviewbutton btn-custom" onClick={() => window.location.href = '/uusiArvostelu'}>
-                            Lisää uusi arvostelu!
-                        </Button>
-                    )}
                     {[...reviews].reverse().map((review: { id: string, header: string, text: string, rating: number, author: { username: string } }) => (
                         <div key={review.id} className="review-box">
                             <h3>{review.header}</h3>
@@ -57,12 +51,17 @@ const ReviewsPage = () => {
 
                     ))}
                 </Col>
-              <Col md={2} className="categories-col">
+              <Col xs={12} md={4} className="categories-col">
+                  {isLoggedIn && (
+                      <Button className="newreviewbutton btn-custom" onClick={() => window.location.href = '/uusiArvostelu'}>
+                          Lisää uusi arvostelu!
+                      </Button>
+                  )}
                 <CategoriesView />
               </Col>
             </Row>
         </Container>
-      </div>
+
     );
 };
 

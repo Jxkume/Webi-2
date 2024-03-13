@@ -64,7 +64,7 @@ const OffersList = () => {
 
   // Testilista suosituista tarjouksista
   const popular = [
-    'HUKKA-ALE', '100% sipsit', '80% mehut', '20% makeisia', '5% karamellit', 'POISTOMYYNTI',
+    'In', 'Progress', 'Coming', 'Soon', '...', ':-)',
   ];
 
   return (

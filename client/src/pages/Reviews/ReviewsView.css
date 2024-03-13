@@ -1,50 +1,24 @@
-.review-detail-container {
-    background-color: #dee6ee;
-    border-radius: 5px;
-    padding: 20px;
+.container-review {
+    background: #fff;
+    margin-bottom: 50px;
     margin-top: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.review-detail-container h1 {
-    color: #000000;
-    font-size: 2em;
+h2, h3 {
+    color: #333;
+}
+
+.Card {
     margin-bottom: 20px;
 }
 
-.review-detail-container p {
-    color: #000000;
-    line-height: 1.6;
-    margin-bottom: 10px;
+.ListGroup {
+    margin-top: 20px;
 }
 
-
-.comment {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.comment p {
-    margin: 0;
-}
-
-.comment-author {
-    font-weight: bold;
-}
-
-.mt-3{
-    margin-bottom: 20px;
-}
-
-.kommenttikent{
-    margin-bottom: 20px;
-}
-
-.reviewsnew-background{
-    padding-bottom: 70px;
+.ListGroup-Item {
+    background-color: #f8f9fa;
+    border: none;
 }
 
 .btn-custom {
@@ -59,4 +33,12 @@
 
 .btn-custom:hover {
     background-color: #FFA5A5;
+}
+
+.Card {
+    margin-bottom: 20px;
+}
+
+.reviewbackground {
+    margin-top: 20px;
 }

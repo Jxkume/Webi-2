@@ -41,47 +41,49 @@ const Login: React.FC = () => {
       }
     };
     return (
-        <Container>
-          <Row className="justify-content-center">
-            <Col md={6} className="login-form-wrapper">
-              <h2>Kirjaudu sisään</h2>
-              <hr />
-              <Form onSubmit={handleLogin}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Sähköposti</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Sähköposti"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Form.Group>
+        <div className="login-background">
+          <div className={"login-overlay"}>
+            <Container>
+              <Row className="justify-content-center">
+                <Col md={4} className="login-form-col">
+                  <Form className={"login-form"} onSubmit={handleLogin}>
+                    <h2>Kirjaudu sisään</h2>
+                    <hr/>
+                    <Form.Group controlId="formBasicEmail">
+                      <Form.Label>Sähköposti</Form.Label>
+                      <Form.Control
+                          type="email"
+                          placeholder="Sähköposti"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Salasana</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Salasana"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <Form.Text className="text-muted">
-                    <Link to="/salasanaPalautus">Unohditko salasanan?</Link>
-                  </Form.Text>
-                </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Label>Salasana</Form.Label>
+                      <Form.Control
+                          type="password"
+                          placeholder="Salasana"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <Form.Text className="text-muted">
+                        <Link className={"login-link"} to="/salasanaPalautus">Unohditko salasanan?</Link>
+                      </Form.Text>
+                    </Form.Group>
 
-                <Button variant="primary" type="submit">
-                  Kirjaudu
-                </Button>
-              </Form>
-              <div className="register-link">
-                <p>Etkö vielä omista tiliä? <Link to="/rekisteroidy">Rekisteröidy</Link></p>
-              </div>
-            </Col>
-            <Col md={6} className="login-image-wrapper">
-            </Col>
-          </Row>
-        </Container>
+                    <Button className={"btn-custom"} type="submit">
+                      Kirjaudu
+                    </Button>
+                  </Form>
+                  <div className="register-link">
+                  <p>Etkö vielä omista tiliä? <Link className={"login-link"} to="/rekisteroidy">Rekisteröidy</Link></p>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
       );
     };
 

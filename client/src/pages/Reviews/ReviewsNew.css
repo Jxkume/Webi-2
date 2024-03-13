@@ -1,4 +1,10 @@
-.form-container {
+.reviewnew {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+
+.reviewform-container {
     display: flex;
     justify-content: center;
     align-items: center;

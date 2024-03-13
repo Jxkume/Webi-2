@@ -1,4 +1,4 @@
-import { Form, Button } from 'react-bootstrap';
+import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -140,42 +140,55 @@ const NewReview = () => {
   }
 
   return (
-    <div className="form-container">
-        <Form onSubmit={createReview} className={"NewReview"}>
-        <Form.Group controlId="reviewName">
-            <Form.Label>Tuotteen nimi:</Form.Label>
-            <Form.Control type="text" placeholder="Syötä tuotteen nimen" onChange={updateInput("reviewName")}/>
-        </Form.Group>
+    <Container className={"reviewnew"}>
+        <Row className={"justify-content-center"}>
+            <Col md={6}>
 
-        <Form.Group controlId="reviewCategory">
-            <Form.Label>Kategoria:</Form.Label>
-            <Form.Control as="select" onChange={updateInput("reviewCategory")}>
-                {categories.map((category: { id: string, name: string }) => (
-                    <option value={category.id}>{category.name}</option>
-                ))}
-            </Form.Control>
-        </Form.Group>
+                <Form onSubmit={createReview}>
+                    <Form.Group className={"mb-3"} controlId="reviewName">
+                        <Form.Label>Tuotteen nimi:</Form.Label>
+                        <Form.Control type="text" placeholder="Syötä tuotteen nimen" onChange={updateInput("reviewName")}/>
+                    </Form.Group>
 
-        <Form.Group controlId="reviewRating">
-            <Form.Label>Arvosana:</Form.Label>
-            <Form.Control type="number" min="1" max="5" placeholder="Arvosana (1-5)" onChange={updateInput("reviewRating")} />
-        </Form.Group>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group controlId="reviewCategory">
+                                <Form.Label>Kategoria:</Form.Label>
+                                <Form.Control as="select" onChange={updateInput("reviewCategory")}>
+                                    {categories.map((category: { id: string, name: string }) => (
+                                        <option value={category.id}>{category.name}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
 
-        <Form.Group controlId="reviewDescription">
-            <Form.Label>Kuvaus:</Form.Label>
-            <Form.Control as="textarea" rows={3} placeholder="Syötä kuvaus" onChange={updateInput("reviewDescription")}/>
-        </Form.Group>
+                        <Col md={6}>
+                            <Form.Group className={"mb-3"} controlId="reviewRating">
+                                <Form.Label>Arvosana:</Form.Label>
+                                <Form.Control type="number" min="1" max="5" placeholder="Arvosana (1-5)" onChange={updateInput("reviewRating")} />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className={"mb-3"} controlId="reviewDescription">
+                                <Form.Label>Kuvaus:</Form.Label>
+                                <Form.Control as="textarea" rows={3} placeholder="Syötä kuvaus" onChange={updateInput("reviewDescription")}/>
+                            </Form.Group>
+                        </Col>
 
-        <Form.Group>
-            <Form.Label>Lataa kuva:</Form.Label>
-            <Form.Control type="file" onChange={updateInput("reviewFile")}/>
-        </Form.Group>
-
-        <Button className={"btn-custom"} type="submit">
-            Lähetä
-        </Button>
-        </Form>
-    </div>
+                        <Col md={"6"}>
+                            <Form.Group className={"mb-3"}>
+                                <Form.Label>Lataa kuva:</Form.Label>
+                                <Form.Control type="file" onChange={updateInput("reviewFile")}/>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Button className={"btn-custom"} type="submit">
+                        Lähetä
+                    </Button>
+                </Form>
+            </Col>
+        </Row>
+    </Container>
   );
 }
 
