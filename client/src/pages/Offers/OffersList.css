@@ -3,3 +3,27 @@
     box-shadow: 0 0 10px rgba(131, 131, 131, 0.1);
     border-radius: 8px;
   }
+
+.btn-custom {
+    background-color: #FFD6D6;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.btn-custom:hover {
+    background-color: #FFA5A5;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.offerlist {
+    margin-bottom: 50px;
+}

@@ -124,7 +124,7 @@ const ReviewView = () => {
     }
 
     return (
-        <Container fluid className="reviewsnew-background">
+        <Container  className="reviewsnew-background">
             <Row className="justify-content-center">
                 <Col md={6} className="review-detail-container">
                     <h1>{(review as { header: string }).header}</h1>
@@ -134,7 +134,7 @@ const ReviewView = () => {
                     <p>Kuva: {(review as { filename: string }).filename.endsWith('.png') ? (review as { filename: string }).filename : 'None'}</p>
                     <p>Julkaisupäivämäärä: {(review as { publicationDate: string }).publicationDate}</p>
                     {isLoggedIn && (
-                        <Button variant="primary" className="mt-3" onClick={handleCommentButtonClick}>Uusi kommentti</Button>
+                        <Button className=" btn-custom mt-3" onClick={handleCommentButtonClick}>Uusi kommentti</Button>
                     )}
                     {showCommentForm && (
                         <Form onSubmit={handleCommentSubmit}>
@@ -142,7 +142,7 @@ const ReviewView = () => {
                                 <Form.Label>Kommentti</Form.Label>
                                 <Form.Control className="kommenttikent" as="textarea" rows={3} value={commentText} onChange={handleCommentChange} />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
+                            <Button className={"btn-custom"} type="submit">
                                 Lähetä
                             </Button>
                         </Form>

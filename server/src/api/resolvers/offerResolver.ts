@@ -36,7 +36,8 @@ export default {
   },
   Offer: {
     comments: async (parent: any) => {
-      return await commentModel.find({ offer: parent.id });
+      console.log("Parent id:", parent.id);
+      return await commentModel.find({ post: parent.id });
     },
   },
 

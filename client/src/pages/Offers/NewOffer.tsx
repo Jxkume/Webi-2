@@ -72,15 +72,15 @@ const NewOffer: React.FC = () => {
 
 
   return (
-    <Container>
+    <Container className={"offernew"}>
       <Row className="justify-content-center">
         <Col md={8}>
           <Form onSubmit={createOffer}>
             <Form.Group className="mb-3" controlId="productName">
-              <Form.Label>Tuotteen nimi ja valmistaja</Form.Label>
+              <Form.Label>Tuotteen nimi:</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={"Tuotteen nimi ja valmistaja"}
+                placeholder={"Tuotteen nimi:"}
                 value={input.productName}
                 onChange={(e) => setInput({...input, productName: e.target.value})}
               />
@@ -89,7 +89,7 @@ const NewOffer: React.FC = () => {
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="store">
-                  <Form.Label>Kauppa</Form.Label>
+                  <Form.Label>Kauppa:</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Kaupan nimi"
@@ -100,7 +100,7 @@ const NewOffer: React.FC = () => {
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="deletionDate">
-                  <Form.Label>Ilmoituksen poistopäivä</Form.Label>
+                  <Form.Label>Tarjouksen päättymispäivä:</Form.Label>
                   <DatePicker
                     selected={input.deletionDate}
                     onChange={(date: Date) => setInput({...input, deletionDate: date})}
@@ -113,7 +113,7 @@ const NewOffer: React.FC = () => {
               </Col>
             </Row>
 
-            <Button variant="primary" type="submit">
+            <Button className={"btn-custom"} type="submit">
               Lähetä ilmoitus
             </Button>
           </Form>
@@ -124,3 +124,4 @@ const NewOffer: React.FC = () => {
 };
 
 export default NewOffer;
+

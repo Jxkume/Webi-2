@@ -37,20 +37,21 @@ const ReviewsPage = () => {
         <Container fluid className="reviews-background">
             <Row className="justify-content-center">
                 <Col md={6} className="reviews-col">
-                    <h1 className='header-title'>Arvostelut</h1>
+                    <h2 className='header-title'>Arvostelut</h2>
+                    <hr />
                     {isLoggedIn && (
-                        <Button className="newreviewbutton" onClick={() => window.location.href = '/uusiArvostelu'}>
+                        <Button className="newreviewbutton btn-custom" onClick={() => window.location.href = '/uusiArvostelu'}>
                             Lisää uusi arvostelu!
                         </Button>
                     )}
                     {[...reviews].reverse().map((review: { id: string, header: string, text: string, rating: number, author: { username: string } }) => (
                         <div key={review.id} className="review-box">
-                            <h2>{review.header}</h2>
+                            <h3>{review.header}</h3>
                             <p>Kuvaus: {review.text}</p>
                             <p>Arvosana: {review.rating}</p>
                             <p>Tekijä: {review.author.username}</p>
                             <Link to={`/nakymaArvostelu/${review.id}`}>
-                                <Button variant="primary">Katso arvostelu</Button>
+                                <Button className={"btn-custom"}>Katso arvostelu</Button>
                             </Link>
                         </div>
 

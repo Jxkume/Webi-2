@@ -31,6 +31,9 @@ type Query {
 }
 
 type Mutation {
+  """
+    Vaatii tokenin tms
+  """
   createOffer(input: OfferInput!): Offer
   updateOffer(id: ID!, input: OfferInput!): Offer
   deleteOffer(id: ID!): Offer

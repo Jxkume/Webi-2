@@ -58,7 +58,8 @@ const NotificationsPage = () => {
     <Container fluid className="notifications-background">
       <Row className="justify-content-center">
         <Col md={6} className="notifications-col">
-          <h1 className='header-title'>Ilmoitukset</h1>
+          <h2 className='header-title'>Ilmoitukset</h2>
+          <hr />
           {[...notifications].reverse().map((notification: {id: string, text: string, publicationDate: string, link: string}) => (
             <div key={notification.id} className="notification">
               <p><Link to={`${notification.link}`}>{notification.text}</Link></p>

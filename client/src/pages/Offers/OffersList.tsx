@@ -68,14 +68,8 @@ const OffersList = () => {
   ];
 
   return (
-    <Container>
+    <Container className={"offerlist"}>
       <Row className="my-4">
-        <Col>
-          {isLoggedIn && (
-              <Button onClick={() => window.location.href = '/uusitarjous'}>
-                Lisää tarjous
-              </Button>
-          )}        </Col>
         <Col xs={12} md={8}>
           <h2>Tarjoukset</h2>
           <hr />
@@ -84,12 +78,17 @@ const OffersList = () => {
               <Card.Body>
                 <Card.Title>{offer.header}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{offer.author.username}</Card.Subtitle>
-                <Link to={`/tarjous/${offer.id}`}>Lue tarjous →</Link>
+                <Link to={`/tarjous/${offer.id}`} className={"link"}>Lue tarjous →</Link>
               </Card.Body>
             </Card>
           ))}
         </Col>
         <Col xs={12} md={4}>
+          {isLoggedIn && (
+              <Button className={"btn-custom"} onClick={() => window.location.href = '/uusitarjous'}>
+                Lisää tarjous
+              </Button>
+          )}
           <Card className="popular-card">
             <Card.Header>Suositut</Card.Header>
             <ListGroup variant="flush">

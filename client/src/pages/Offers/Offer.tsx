@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import {Container, Row, Col, Card, ListGroup, Form} from 'react-bootstrap';
 import './Offer.css';
 import { User } from '../../Types/User';
 import {useParams} from "react-router-dom";
@@ -48,9 +48,13 @@ const Offer: React.FC = () => {
       }),
     });
     const responseData = await response.json();
-    const fetchedOffer = responseData.data.offerById; 
+    console.log('Response data:', responseData);
+    const fetchedOffer = responseData.data.offerById;
+
     if (fetchedOffer) {
       setOffer(fetchedOffer);
+      console.log('Fetched offer:', fetchedOffer);
+      console.log('Fetched comments:', fetchedOffer.comments);
       console.log(fetchedOffer.comments);
       setComments(fetchedOffer.comments);
       setAuthor(fetchedOffer.author);
@@ -116,10 +120,10 @@ const Offer: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container className={"offer"}>
       <Row className="my-4">
         <Col>
-          <h2>Tarjous</h2>
+          <h2 >Tarjous</h2>
           <Card>
             <Card.Body>
               <Card.Title>{offer && (offer as { header: string }).header}</Card.Title>
@@ -133,28 +137,31 @@ const Offer: React.FC = () => {
         <Col>
           <h3>Kommentit</h3>
           {isLoggedIn && (
-              <button onClick={handleCommentButtonClick}>Kommentoi</button>
+              <button className={"btn-custom"} onClick={handleCommentButtonClick}>Kommentoi</button>
           )}
           {showCommentForm && (
-              <form onSubmit={handleCommentSubmit}>
-                    <textarea
-                        value={commentText}
-                        onChange={handleCommentChange}
-                    />
-                <button type="submit">Lähetä kommentti</button>
-              </form>
+              <Form onSubmit={handleCommentSubmit}>
+                <Form.Label>Kommentti:</Form.Label>
+                    <Form.Control as="textarea" rows={3} value={commentText} onChange={handleCommentChange} />
+
+                <button className={"btn-custom"} type="submit">Lähetä</button>
+              </Form>
           )}
-          <ListGroup>
-  {comments && comments.map((comment: {id: string, text: string, author: {username: string}}) => {
-    console.log('Rendering comment:', comment); // New log statement
-    return (
-      <ListGroup.Item key={comment.id}>
-        <strong>{comment.author.username}</strong>
-        <p>{comment.text}</p>
-      </ListGroup.Item>
-    );
-  })}
-</ListGroup>
+            <ListGroup>
+                {comments.length > 0 ? (
+                    comments.map((comment: {id: string, text: string, author: {username: string}}) => {
+                        console.log('Rendering comment:', comment);
+                        return (
+                            <ListGroup.Item key={comment.id}>
+                                <strong>{comment.author.username}</strong>
+                                <p>{comment.text}</p>
+                            </ListGroup.Item>
+                        );
+                    })
+                ) : (
+                    <p>Ei vielä kommentteja</p>
+                )}
+            </ListGroup>
         </Col>
       </Row>
     </Container>

@@ -21,27 +21,6 @@ type Comment {
   post: Post!
 }
 
-type Offer {
-  id: ID!
-  author: User!
-  category: Category!
-  header: String!
-  text: String!
-  publicationDate: DateTime
-  deletionDate: DateTime
-}
-
-type Review {
-  id: ID!
-  author: User!
-  category: Category!
-  header: String!
-  text: String!
-  filename: String!
-  publicationDate: DateTime
-  rating: Int!
-}
-
 union Post = Offer | Review
 
 type Query {

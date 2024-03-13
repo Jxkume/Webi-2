@@ -2,18 +2,18 @@
     background-size: cover;
     height: 100vh;
   }
-  
+
   .register-form-col {
-    background-color: rgba(0, 0, 0, 0.8); 
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 50px;
-    margin-top: 100px; 
+    margin-top: 100px;
     border-radius: 15px;
   }
-  
+
   .register-form {
     margin: 20px 0;
   }
-  
+
   .login-link {
     margin-top: 20px;
   }
@@ -38,4 +38,18 @@
 
 .reviews-background{
   padding-bottom: 50px;
+}
+
+.btn-custom {
+  background-color: #FFD6D6;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: #FFA5A5;
 }
