@@ -1,0 +1,18 @@
+.btn-custom {
+    background-color: #FFD6D6;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #FFA5A5;
+}
+
+.offernew {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}

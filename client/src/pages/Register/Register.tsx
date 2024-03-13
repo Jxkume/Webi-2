@@ -59,50 +59,55 @@ const RegisterPage = () => {
     }
   }
     return (
-      <Container fluid className="register-background">
-        <Row className="justify-content-center">
-          <Col md={6} className="register-form-col">
-            <Form
-            className="register-form"
-            onSubmit={createAccount}
-            >
-              <h2>Rekisteröidy</h2>
-              <Form.Group controlId="formBasicUsername">
-                <Form.Label>Käyttäjänimi</Form.Label>
-                <Form.Control
-                type="text"
-                placeholder="Käyttäjänimi"
-                onChange={updateInput("username")}/>
-              </Form.Group>
+      <div className="register-background">
+        <div className="register-overlay">
+          <Container>
+            <Row className="justify-content-center">
+              <Col md={4} className="register-form-col">
+                <Form
+                className="register-form"
+                onSubmit={createAccount}
+                >
+                  <h2>Rekisteröidy</h2>
+                  <hr/>
+                  <Form.Group controlId="formBasicUsername">
+                    <Form.Label>Käyttäjänimi</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Käyttäjänimi"
+                    onChange={updateInput("username")}/>
+                  </Form.Group>
 
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Sähköposti</Form.Label>
-                <Form.Control
-                type="email"
-                placeholder="Sähköposti"
-                onChange={updateInput("email")} />
-              </Form.Group>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Sähköposti</Form.Label>
+                    <Form.Control
+                    type="email"
+                    placeholder="Sähköposti"
+                    onChange={updateInput("email")} />
+                  </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Salasana</Form.Label>
-                <Form.Control
-                type="password"
-                placeholder="Salasana"
-                onChange={updateInput("password")} />
-              </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Salasana</Form.Label>
+                    <Form.Control
+                    type="password"
+                    placeholder="Salasana"
+                    onChange={updateInput("password")} />
+                  </Form.Group>
 
-              <Button variant="primary" type="submit">
-                Rekisteröidy
-              </Button>
+                  <Button className={"btn-custom"} type="submit">
+                    Rekisteröidy
+                  </Button>
 
-              <div className="login-link">
-                Löytyykö sinulta jo tili? <br/><Link to="/kirjaudu">Kirjaudu sisään</Link>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-  );
+                  <div>
+                    Löytyykö sinulta jo tili? <br/><Link className={"login-link"} to="/kirjaudu">Kirjaudu sisään</Link>
+                  </div>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </div>
+    );
 };
 
 

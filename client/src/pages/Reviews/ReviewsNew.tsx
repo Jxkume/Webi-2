@@ -141,14 +141,14 @@ const NewReview = () => {
 
   return (
     <div className="form-container">
-        <Form onSubmit={createReview}>
+        <Form onSubmit={createReview} className={"NewReview"}>
         <Form.Group controlId="reviewName">
-            <Form.Label>Tuotteen nimi</Form.Label>
+            <Form.Label>Tuotteen nimi:</Form.Label>
             <Form.Control type="text" placeholder="Syötä tuotteen nimen" onChange={updateInput("reviewName")}/>
         </Form.Group>
 
         <Form.Group controlId="reviewCategory">
-            <Form.Label>Kategoria</Form.Label>
+            <Form.Label>Kategoria:</Form.Label>
             <Form.Control as="select" onChange={updateInput("reviewCategory")}>
                 {categories.map((category: { id: string, name: string }) => (
                     <option value={category.id}>{category.name}</option>
@@ -157,21 +157,21 @@ const NewReview = () => {
         </Form.Group>
 
         <Form.Group controlId="reviewRating">
-            <Form.Label>Arvosana</Form.Label>
+            <Form.Label>Arvosana:</Form.Label>
             <Form.Control type="number" min="1" max="5" placeholder="Arvosana (1-5)" onChange={updateInput("reviewRating")} />
         </Form.Group>
 
         <Form.Group controlId="reviewDescription">
-            <Form.Label>Kuvaus</Form.Label>
+            <Form.Label>Kuvaus:</Form.Label>
             <Form.Control as="textarea" rows={3} placeholder="Syötä kuvaus" onChange={updateInput("reviewDescription")}/>
         </Form.Group>
 
         <Form.Group>
-            <Form.Label>Lataa kuva </Form.Label>
+            <Form.Label>Lataa kuva:</Form.Label>
             <Form.Control type="file" onChange={updateInput("reviewFile")}/>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button className={"btn-custom"} type="submit">
             Lähetä
         </Button>
         </Form>

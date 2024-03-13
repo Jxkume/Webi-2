@@ -18,6 +18,7 @@ const Home = () => {
     }
   }
 
+
   const handleSearchInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSearchInput(event.target.value);
   }
@@ -28,8 +29,8 @@ const Home = () => {
 
   return (
     <div className="hero-section">
-      <div className="overlay">
-        <Container className="text-center">
+      <div className="overlay-home">
+        <Container className="text-center home-container">
           <Row className="justify-content-center">
             <Col xs={12} md={8} lg={6} className="text-center">
               <img src={HeroTitleImage} alt="Delightful Insights" className="logo-image mb-3" />
@@ -41,7 +42,7 @@ const Home = () => {
               <Form className="d-flex justify-content-center">
                 <div className="d-flex">
                   <Form.Control type="text" placeholder="Hae tuotetta..." className="me-2 search-input" value={searchInput} onChange={handleSearchInputChange} />
-                  <Button variant="primary" className="btn-custom" onClick={handleSearchClick}>Hae</Button>
+                  <Button  className="btn-custom" onClick={handleSearchClick}>Hae</Button>
                 </div>
               </Form>
             </Col>
@@ -49,7 +50,7 @@ const Home = () => {
 
           <Row className="justify-content-center">
             <Col xs={12} md={8} lg={6} className="text-center">
-              <Button className="btn-custom mt-3" onClick={handleButtonClick}>{isLoggedin ? 'Kirjoita arvostelu!' : 'Rekisteröidy nyt!'}</Button>
+              <Button className="btn-custom" onClick={handleButtonClick}>{isLoggedin ? 'Kirjoita arvostelu!' : 'Rekisteröidy nyt!'}</Button>
             </Col>
           </Row>
         </Container>

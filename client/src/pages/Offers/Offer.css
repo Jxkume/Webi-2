@@ -3,18 +3,37 @@
 }
 
 h2, h3 {
-    color: #333; 
+    color: #333;
   }
-  
+
   .Card {
     margin-bottom: 20px;
   }
-  
+
   .ListGroup {
     margin-top: 20px;
   }
-  
+
   .ListGroup-Item {
     background-color: #f8f9fa;
-    border: none; 
+    border: none;
   }
+
+.btn-custom {
+  background-color: #FFD6D6;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: #FFA5A5;
+}
+
+.offer {
+  margin-bottom: 50px;
+  margin-top: 20px;
+}

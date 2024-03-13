@@ -130,6 +130,7 @@ const CategoriesView = () => {
         <Row className='justify-content-center'>
           <Col md={3} className='categories-col'>
             <h2 className='categories-header'>Kategoriat</h2>
+            <hr />
               {
                 categories.map((category: {name: string, _id: string}) => (
                   <div key={category.name} className='category-row'>
