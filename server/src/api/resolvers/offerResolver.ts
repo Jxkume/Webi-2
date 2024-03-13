@@ -57,7 +57,6 @@ export default {
             args.input.deletionDate.getDate() + 14
           );
         }
-        console.log("Offer input:", args.input);
         return await offerModel.create(args.input);
       } catch (error) {
         throw new Error("Failed to create offer");
