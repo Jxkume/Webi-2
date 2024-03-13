@@ -5,13 +5,15 @@ import jwt from "jsonwebtoken";
 import CategoryModel from "../src/api/models/categoryModel";
 import commentModel from "../src/api/models/commentModel";
 import notificationModel from "../src/api/models/notificationModel";
+import reviewModel from "../src/api/models/reviewModel";
+import { isLoggedIn } from "../src/functions/authorize";
 
 describe("Mutations tests", () => {
   let token: string;
   let token2: string;
 
   const user = {
-    id: "testUserId",
+    id: new mongoose.Types.ObjectId().toString(),
     username: "testUser",
     email: "testUser@example.com",
     role: "admin",
@@ -24,12 +26,13 @@ describe("Mutations tests", () => {
     role: "admin",
   };
 
-  const anotherOneUser = {
-    id: new mongoose.Types.ObjectId().toString(),
-    username: "anotherOneTestUser",
-    email: "anotherOneTestUser@example.com",
-    role: "admin",
-  };
+  const categoryTestID = "65e3174757f0cfbcc5f4ee50";
+
+  const postTestID = "65f0b32d38475ee76f4666bc";
+
+  const commentTestID = "65f2b877fec7e6e54debae91";
+
+  const reviewTestID = "65f0b32d38475ee76f4666bc";
 
   token = jwt.sign(user, <string>process.env.JWT_SECRET);
 
@@ -67,7 +70,6 @@ describe("Mutations tests", () => {
 
   it("should update a category", async () => {
     const category = await CategoryModel.create({ name: "Old Category" });
-
     const response = await request(app)
       .post("/graphql")
       .set("Authorization", `Bearer ${token}`)
@@ -113,12 +115,11 @@ describe("Mutations tests", () => {
   });
 
   it("should create a new comment", async () => {
-    const postID = "65f0b32d38475ee76f4666bc";
     const response = await request(app)
       .post("/graphql")
       .set("Authorization", `Bearer ${token2}`)
       .send({
-        query: `mutation { createComment(input: { text: "Test Comment", post: "${postID}" }) { id text } }`,
+        query: `mutation { createComment(input: { text: "Test Comment", post: "${postTestID}" }) { id text } }`,
       });
     const { data } = response.body;
     expect(data.createComment.text).toBe("Test Comment");
@@ -127,12 +128,11 @@ describe("Mutations tests", () => {
   });
 
   it("should update a comment", async () => {
-    const commentID = "65f2b877fec7e6e54debae91";
     const response = await request(app)
       .post("/graphql")
       .set("Authorization", `Bearer ${token2}`)
       .send({
-        query: `mutation { updateComment(id: "${commentID}", input: { text: "Updated Comment" }) { id text } }`,
+        query: `mutation { updateComment(id: "${commentTestID}", input: { text: "Updated Comment" }) { id text } }`,
       });
     const { data } = response.body;
     expect(data.updateComment.text).toBe("Updated Comment");
@@ -221,7 +221,7 @@ describe("Mutations tests", () => {
       receiver: anotherUser.id,
       text: "This is a test notification to delete",
       publicationDate: new Date(),
-      expire: new Date(new Date().setDate(new Date().getDate() + 14)), // Set to expire in 14 days
+      expire: new Date(new Date().setDate(new Date().getDate() + 14)),
     });
 
     const response = await request(app)
@@ -246,5 +246,156 @@ describe("Mutations tests", () => {
       notification.id
     );
     expect(deletedNotification).toBeNull();
+  });
+
+  it("should add a review", async () => {
+    const response = await request(app)
+      .post("/graphql")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({
+        query: `
+          mutation {
+            addReview(input: { header: "Test review", text: "This is a test review", rating: 5, category: "${categoryTestID}", filename: "test.jpg"}) {
+              id
+              header
+              text
+              rating
+              category {
+                id
+              }
+            }
+          }
+        `,
+      });
+    const { data } = response.body;
+    expect(data.addReview.header).toBe("Test review");
+    expect(data.addReview.text).toBe("This is a test review");
+    expect(data.addReview.rating).toBe(5);
+    expect(data.addReview.category.id).toBe(categoryTestID);
+    const review = reviewModel.findOne({ text: "This is a test review" });
+    expect(review).not.toBeNull();
+  });
+
+  it("should update a review", async () => {
+    const response = await request(app)
+      .post("/graphql")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({
+        query: `
+          mutation {
+            updateReview(id: "${reviewTestID}", input: { header: "Updated review", text: "This is an updated review", rating: 4 }) {
+              id
+              header
+              text
+              rating
+            }
+          }
+        `,
+      });
+
+    const { data } = response.body;
+    expect(data.updateReview.id).toBe(reviewTestID);
+    expect(data.updateReview.header).toBe("Updated review");
+    expect(data.updateReview.text).toBe("This is an updated review");
+    expect(data.updateReview.rating).toBe(4);
+
+    const updatedReview = await reviewModel.findOne({
+      text: "This is an updated review",
+    });
+    expect(updatedReview).not.toBeNull();
+  });
+
+  it("should delete a review", async () => {
+    const reviewTest = await reviewModel.create({
+      header: "Test Review",
+      text: "This is a test review that should be deleted.",
+      rating: 5,
+      author: anotherUser.id,
+      category: categoryTestID,
+      publicationDate: new Date(),
+    });
+    const response = await request(app)
+      .post("/graphql")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({
+        query: `
+          mutation {
+            deleteReview(id: "${reviewTest.id}") {
+              id
+            }
+          }
+        `,
+      });
+
+    const deletedReview = await reviewModel.findById(reviewTest.id);
+    expect(deletedReview).toBeNull();
+  });
+
+  it("should login a user", async () => {
+    const response = await request(app)
+      .post("/graphql")
+      .send({
+        query: `
+          mutation {
+            login(credentials: { username: "testuser", password: "testpassword" }) {
+              token
+              user {
+                id
+                username
+              }
+            }
+          }
+        `,
+      });
+    expect(isLoggedIn);
+  });
+
+  it("should register a user", async () => {
+    const response = await request(app)
+      .post("/graphql")
+      .send({
+        query: `
+          mutation {
+            register(user: { username: "newuser", password: "newpassword", email: "newuser@test.com" }) {
+              user {
+                id
+                username
+                email
+              }
+            }
+          }
+        `,
+      });
+
+    const { data } = response.body;
+    expect(data.register.user.username).toBe("newuser");
+    expect(data.register.user.email).toBe("newuser@test.com");
+  });
+
+  it("should add a category to a user", async () => {
+    const response = await request(app)
+      .post("/graphql")
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        query: `
+          mutation {
+            addCategoryToUser(categoryId: "${categoryTestID}") {
+              id
+              username
+              isFollowing {
+                id
+              }
+            }
+          }
+        `,
+      });
+
+    const { data } = response.body;
+    if (!data.addCategoryToUser) {
+      console.log(response.body);
+    }
+    expect(data.addCategoryToUser.isFollowing).toContainEqual({
+      id: categoryTestID,
+    });
   });
 });
