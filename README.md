@@ -49,7 +49,13 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 ## Asennusohjeet
 Jotta saat projektin toimimaan omalla tietokoneellasi seuraa seuraavat ohjeet:
 
-1. **Kloonaa repositorio:**
+1. **[Kloonaa autentikointirepositorio ja noudata README-tiedoston ohjeita:](https://github.com/fngnv/web2-auth-server.git)**
+   Avaa komentorivi ja suorita seuraava komento:
+   ```
+   git clone <repositoryn URL>
+   ```
+
+2. **Kloonaa tämä repositorio**
    Avaa komentorivi ja suorita seuraava komento:
    ```
    git clone <repositoryn URL>
