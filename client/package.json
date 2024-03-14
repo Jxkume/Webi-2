@@ -54,6 +54,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/react-datepicker": "^6.0.3",
-    "copyfiles": "^2.4.1"
+    "copyfiles": "^2.4.1",
+    "crypto-browserify": "^3.12.0"
   }
 }
