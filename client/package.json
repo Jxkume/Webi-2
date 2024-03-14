@@ -27,9 +27,6 @@
     "typescript-cookie": "^1.0.6",
     "web-vitals": "^2.1.4"
   },
-  "browser": {
-    "crypto": false
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
