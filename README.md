@@ -61,7 +61,7 @@ Jotta saat projektin toimimaan omalla tietokoneellasi seuraa seuraavat ohjeet:
    git clone <repositoryn URL>
    ```
 
-2. **Määritä ympäristömuuttujat ja Asenna serverin riippuvuudet:**
+2. **Määritä ympäristömuuttujat ja asenna serverin riippuvuudet:**
    Vaihda .env.sample-tiedoston nimi .env:ksi ja lisää arvo DB_URL-muuttujalle.
    Siirry projektin juurikansioon komentorivillä ja suorita:
    ```
