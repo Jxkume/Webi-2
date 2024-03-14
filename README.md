@@ -55,7 +55,7 @@ Jotta saat projektin toimimaan omalla tietokoneellasi seuraa seuraavat ohjeet:
    git clone <repositoryn URL>
    ```
 
-2. **Kloonaa tämä repositorio**
+2. **Kloonaa tämä repositorio:**
    Avaa komentorivi ja suorita seuraava komento:
    ```
    git clone <repositoryn URL>
