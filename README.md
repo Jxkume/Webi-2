@@ -46,3 +46,10 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 8. Jos et ole saanut ilmoituksia, pyydä kaveria käymään esimerkiksi kommentoimassa jotain kirjoittamaasi arvostelua
 9. Lopuksi kirjaudu ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan niitä
 
+## Asennusohjeet
+Jotta saat projektin toimimaan omalla tietokoneellasi, käy kloonaamassa ja asentamassa seuraavat repot:
+
+[Frontend repository](https://github.com/fngnv/web2-frontend.git)
+[Backend repository](https://github.com/fngnv/web2-backend.git)   
+[Authentication repository](https://github.com/fngnv/web2-auth-server.git)   
+
