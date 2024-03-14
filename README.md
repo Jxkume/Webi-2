@@ -50,6 +50,8 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 Jotta saat projektin toimimaan omalla tietokoneellasi, käy kloonaamassa ja asentamassa seuraavat repot:
 
 [Frontend repository](https://github.com/fngnv/web2-frontend.git)
-[Backend repository](https://github.com/fngnv/web2-backend.git)   
+
+[Backend repository](https://github.com/fngnv/web2-backend.git)
+
 [Authentication repository](https://github.com/fngnv/web2-auth-server.git)   
 
