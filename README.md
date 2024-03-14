@@ -11,23 +11,23 @@ Kohderyhmänä ovat kaikki 15-vuotiaasta ylöspäin, jotka ovat kiinnostuneet el
 ## Sovelluksen toiminnallisuudet
 ### Arvostelut
 Kaikki sivuston kävijät voivat selata ja lukea arvosteluja, sekä niiden kommentteja. Vain käyttäjät, jotka ovat rekisteröineet tunnuksen ja kirjautuneet sisään, voivat kirjoittaa arvosteluja ja kommentoida niitä.\
-Arvostelun voi kirjoittaa täyttämällä seuraavat kentät: tuotteen nimi, kategoria, arvosana (kokonaisluku 1-5) ja kuvaus. Lisäksi käyttäjän täytyy lisätä tuotteesta kuva.  
+Arvostelun voi kirjoittaa täyttämällä seuraavat kentät: tuotteen nimi, kategoria, arvosana (kokonaisluku 1-5) ja kuvaus. Lisäksi käyttäjän täytyy lisätä tuotteesta kuva. Täältä löytyvät myös tuotekategoriat, joita käyttäjät voivat seurata ja saada ilmoituksia uusista arvosteluista.
 
 ### Tarjoukset
 Tarjouksia ja niiden kommentteja voivat selata ja lukea kaikki käyttäjät, mutta vain kirjautuneet käyttäjät voivat kirjoittaa tarjouksia ja kommentoida niitä.\
-Tarjouksen voi kirjoittaa täyttämällä seuraavat kentät: tuotteen nimi ja valmistaja, kauppa ja tarjouksen päättymispäivämäärä.
+Tarjouksen voi kirjoittaa täyttämällä seuraavat kentät: tuotteen nimi, kauppa ja tarjouksen päättymispäivämäärä.
 
 ### Rekisteröityminen ja kirjautuminen
 Käyttäjät voivat rekisteröityä sivulle antamalla nimimerkin, sähköpostin ja salasanan. Kirjautuminen onnistuu sähköpostilla ja salasanalla. Mikäli käyttäjä on unohtanut salasanansa, hän voi palauttaa sen antamalla sähköpostiosoitteensa.
 
 ### Profiili
-Kirjautuneet käyttäjät pääsevät näkemään tarvittaessa käyttäjänimensä ja sähköpostinsa. Tätä kautta he voivat myös vaihtaa nykyisen salasanansa uuteen. Käyttäjät voivat myös poistaa tunnuksensa, tämä ei kuitenkaan poista käyttäjän kirjoittamia arvosteluja, tarjouksia ja kommentteja.
+Kirjautuneet käyttäjät pääsevät näkemään tarvittaessa käyttäjänimensä ja sähköpostinsa. Tätä kautta he voivat myös vaihtaa nykyisen sähköpostinsa, käyttäjänimensä tai salasanansa uuteen. Käyttäjät voivat myös poistaa tunnuksensa, tämä tämä poistaa myös käyttäjän kirjoittamat arvostelut, tarjoukset ja kommentit.
 
 ### Haku
 Etusivulla kaikki käyttäjät voivat hakea sanahakuna arvosteluita, tarjouksia ja kategorioita.
 
 ### Ilmoitukset
-Rekisteröityneet käyttäjät saavat ilmoituksia Ilmoitukset-välilehteen uusista tarjouksista ja kommenteista heidän kirjoittamiin arvosteluihin.
+Rekisteröityneet käyttäjät saavat ilmoituksia Ilmoitukset-välilehteen uusista arvosteluista seuraamiinsa kategorioihin liittyen ja kommenteista käyttäjän kirjoittamiin arvosteluihin.
 
 
 ## Testattavuus
@@ -37,7 +37,7 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 3. Arvostelut-sivulla seuraa myös haluamiasi kategorioita
 4. Siirry Tarjoukset-sivulle, kirjoita uusi tarjous, lue ja kommentoi muiden tarjouksia
 5. Profiili-sivulla klikkaa Muokkaa-nappia ja kirjoita haluamasi sähköposti, käyttäjänimi ja salasana, paina Tallenna ja kirjaudu ulos
-6. Kokeile kirjautua sisään uusimma muokkauksessa antamilla tiedoillasi
-7. Ilmoitukset-sivu näyttää ilmoituksia kommenteista kirjoittamisiisi arvosteluihin ja tarjouksiin, sekä uusista arvosteluista seuraamiisi kategorioihin
+6. Kokeile kirjautua sisään uusilla muokkauksessa antamilla tiedoillasi
+7. Ilmoitukset-sivu näyttää ilmoituksia kommenteista kirjoittamisiisi arvosteluihin, sekä uusista arvosteluista seuraamiisi kategorioihin
 8. Jos et ole saanut ilmoituksia, pyydä kaveria käymään esimerkiksi kommentoimassa jotain kirjoittamaasi arvostelua
-9. Lopuksi voit kirjautua ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan
+9. Lopuksi kirjaudu ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan niitä
