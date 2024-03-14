@@ -31,4 +31,13 @@ Rekisteröityneet käyttäjät saavat ilmoituksia Ilmoitukset-välilehteen uusis
 
 
 ## Testattavuus
-Ohjeistus miten sovellus testataan, jotta kaikki toiminnalisuudet löytyvät
+Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla sisään, jolloin testaaja saa käyttöönsä kaikki Toiminnallisuudet-kohdassa luetellut ominaisuudet. Onnistuneen rekisteröitymisen ja kirjautumisen jälkeen testaajan kannattaa edetä seuraavassa järjestyksessä:
+1. Kokeile Haku-toimintoa, esimerkiksi "mochi" tuottaa vähintään yhden hakutuloksen arvosteluihin
+2. Siirry Arvostelut-sivulle, kirjoita arvostelu, lue muiden arvosteluja ja kommentoi arvostelua
+3. Arvostelut-sivulla seuraa myös haluamiasi kategorioita
+4. Siirry Tarjoukset-sivulle, kirjoita uusi tarjous, lue ja kommentoi muiden tarjouksia
+5. Profiili-sivulla klikkaa Muokkaa-nappia ja kirjoita haluamasi sähköposti, käyttäjänimi ja salasana, paina Tallenna ja kirjaudu ulos
+6. Kokeile kirjautua sisään uusimma muokkauksessa antamilla tiedoillasi
+7. Ilmoitukset-sivu näyttää ilmoituksia kommenteista kirjoittamisiisi arvosteluihin ja tarjouksiin, sekä uusista arvosteluista seuraamiisi kategorioihin
+8. Jos et ole saanut ilmoituksia, pyydä kaveria käymään esimerkiksi kommentoimassa jotain kirjoittamaasi arvostelua
+9. Lopuksi voit kirjautua ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan
