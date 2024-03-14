@@ -81,8 +81,10 @@ export default {
       isLoggedIn(context);
       if (context.userdata?.user.role !== "admin") {
         const filter = { _id: args.id, author: context.userdata?.user.id };
+        await commentModel.find({post: filter._id}).deleteMany();
         return await reviewModel.findOneAndDelete(filter);
       } else {
+        await commentModel.find({post: args.id}).deleteMany();
         return await reviewModel.findByIdAndDelete(args.id);
       }
     },

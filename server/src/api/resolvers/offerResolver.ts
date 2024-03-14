@@ -91,12 +91,14 @@ export default {
       try {
         isLoggedIn(context);
         if (context.userdata?.user.role === "admin") {
+          await commentModel.deleteMany({post: args.id});
           return await offerModel.findByIdAndDelete(args.id);
         }
         const offer = await offerModel.findById(args.id);
         if (context.userdata?.user.id !== offer?.author.toString()) {
           throw new Error("Not authorized to delete offer");
         }
+        await commentModel.deleteMany({post: args.id});
         return await offerModel.findByIdAndDelete(args.id);
       } catch (error) {
         throw new Error("Failed to delete offer");

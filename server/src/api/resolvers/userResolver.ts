@@ -10,6 +10,10 @@ import fetchData from "../../functions/fetchData";
 import { UserResponse, LoginResponse } from "../../types/MessageTypes";
 import MyContext from "../../types/MyContext";
 import { isLoggedIn, isAdmin } from "../../functions/authorize";
+import reviewModel from "../models/reviewModel";
+import { off } from "process";
+import offerModel from "../models/offerModel";
+import commentModel from "../models/commentModel";
 
 export default {
   Notification: {
@@ -141,6 +145,9 @@ export default {
       context: MyContext
     ) => {
       isLoggedIn(context);
+      await reviewModel.deleteMany({ author: context.userdata?.user.id });
+      await offerModel.deleteMany({ author: context.userdata?.user.id });
+      await commentModel.deleteMany({ author: context.userdata?.user.id });
       return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
         method: "DELETE",
         headers: {
@@ -175,6 +182,9 @@ export default {
     ) => {
       isLoggedIn(context);
       isAdmin(context);
+      await reviewModel.deleteMany({ author: args.id });
+      await offerModel.deleteMany({ author: args.id });
+      await commentModel.deleteMany({ author: args.id });
       return await fetchData<UserResponse>(
         `${process.env.AUTH_URL}/users/${args.id}`,
         {
