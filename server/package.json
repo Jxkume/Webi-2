@@ -2,12 +2,12 @@
   "name": "webi-2",
   "version": "1.0.0",
   "description": "Simple GraphQl web application for the school project",
-  "main": "dist/src/index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "copyGraphql": "copyfiles --error src/api/schemas/*.graphql dist",
+    "copyGraphql": "copyfiles --error src/api/schemas/*.graphql dist/api/schemas",
     "postbuild": "npm run copyGraphql",
     "lint": "eslint --fix src test",
     "test": "jest"
