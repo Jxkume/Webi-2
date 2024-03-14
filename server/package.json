@@ -11,7 +11,7 @@
     "postbuild": "npm run copyGraphql",
     "lint": "eslint --fix src test",
     "test": "jest"
-  },
+  }, 
   "author": "JH",
   "license": "ISC",
   "dependencies": {
