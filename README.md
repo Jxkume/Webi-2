@@ -4,6 +4,7 @@
 
 ### Vera Finogenova, Jhon Rastrojo López & Korpi Tolonen
 
+
 ## Idea ja kohderyhmä
 Delightful Insights on saanut inpiraationsa sosiaalisen median sovelluksen, Jodelin, kanavasta @herkkuarvostelut. Tavoitteena on tuoda kanavan helppous
 monipuolisempaan käyttöliittymään ja antaa käyttäjille enemmän toiminnallisuuksia. Tähän on inspiraatiota otettu Jodelin @tarjoustutka-kanavasta, jonne 
