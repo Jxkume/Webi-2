@@ -1,4 +1,4 @@
-![hero-title](https://github.com/Jxkume/Webi-2/assets/104062080/00a4e342-d90b-4a20-87f2-1dca0bf5eb95)
+![hero-title][Delightful Insights](https://zealous-stone-0ba3ea003.5.azurestaticapps.net)(https://github.com/Jxkume/Webi-2/assets/104062080/00a4e342-d90b-4a20-87f2-1dca0bf5eb95)
 ### Vera Finogenova, Jhon Rastrojo López & Korpi Tolonen
 
 ## Idea ja kohderyhmä
@@ -33,7 +33,7 @@ Rekisteröityneet käyttäjät saavat ilmoituksia Ilmoitukset-välilehteen uusis
 ## Testattavuus
 Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla sisään, jolloin testaaja saa käyttöönsä kaikki Toiminnallisuudet-kohdassa luetellut ominaisuudet. Onnistuneen rekisteröitymisen ja kirjautumisen jälkeen testaajan kannattaa edetä seuraavassa järjestyksessä:
 1. Kokeile Haku-toimintoa, esimerkiksi "mochi" tuottaa vähintään yhden hakutuloksen arvosteluihin
-2. Siirry Arvostelut-sivulle, kirjoita arvostelu, lue muiden arvosteluja ja kommentoi arvostelua
+2. Siirry Arvostelut-sivulle, kirjoita arvostelu (Muista, että kategoria "Makkarat" on varattu testeille), lue muiden arvosteluja ja kommentoi arvostelua 
 3. Arvostelut-sivulla seuraa myös haluamiasi kategorioita
 4. Siirry Tarjoukset-sivulle, kirjoita uusi tarjous, lue ja kommentoi muiden tarjouksia
 5. Profiili-sivulla klikkaa Muokkaa-nappia ja kirjoita haluamasi sähköposti, käyttäjänimi ja salasana, paina Tallenna ja kirjaudu ulos
@@ -41,3 +41,4 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 7. Ilmoitukset-sivu näyttää ilmoituksia kommenteista kirjoittamisiisi arvosteluihin, sekä uusista arvosteluista seuraamiisi kategorioihin
 8. Jos et ole saanut ilmoituksia, pyydä kaveria käymään esimerkiksi kommentoimassa jotain kirjoittamaasi arvostelua
 9. Lopuksi kirjaudu ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan niitä
+
