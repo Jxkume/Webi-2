@@ -6,6 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "./",
     "paths": {
       "crypto": [
         "node_modules/crypto-browserify"
