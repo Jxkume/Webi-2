@@ -47,11 +47,41 @@ Sivuston testaaminen onnistuu parhaiten rekisteröitymällä ja kirjautumalla si
 9. Lopuksi kirjaudu ulos, voit käydä kaikki sivut vielä läpi kirjautumattomana, mutta et pysty kirjoittamaan arvosteluja/tarjouksia tai kommentoimaan niitä
 
 ## Asennusohjeet
-Jotta saat projektin toimimaan omalla tietokoneellasi, käy kloonaamassa ja asentamassa seuraavat repot:
+Jotta saat projektin toimimaan omalla tietokoneellasi seuraa seuraavat ohjeet:
 
-[Frontend repository](https://github.com/fngnv/web2-frontend.git)
+1. **Kloonaa repositorio:**
+   Avaa komentorivi ja suorita seuraava komento:
+   ```
+   git clone <repositoryn URL>
+   ```
 
-[Backend repository](https://github.com/fngnv/web2-backend.git)
+2. **Määritä ympäristömuuttujat ja Asenna serverin riippuvuudet:**
+   Vaihda .env.sample-tiedoston nimi .env:ksi ja lisää arvo DB_URL-muuttujalle.
+   Siirry projektin juurikansioon komentorivillä ja suorita:
+   ```
+   cd server
+   npm install
+   ```
+  
+4. **Rakenna serveri:**
+   Kun asennus on valmis, suorita seuraava komento:
+   ```
+   npm run build
+   ```
 
-[Authentication repository](https://github.com/fngnv/web2-auth-server.git)   
+5. **Asenna clientin riippuvuudet:**
+   Siirry client-kansioon komentorivillä:
+   ```
+   cd ../client
+   npm install
+   ```
+
+6. **Rakenna client:**
+   Kun asennus on valmis, suorita seuraava komento:
+   ```
+   npm run build
+   ```
+
+Tämän jälkeen projekti toimii siten, että sinulla on kaksi terminaali-ikkunaa auki. Yhdessä suoritat npm run build server-kansiossa ja client-kansiossa. Toisessa ikkunassa suoritat npm start client-kansiossa
+
 
